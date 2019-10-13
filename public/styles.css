@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'PT_Root_UI';
+    src: local('PT_Root_UI_Regular'), local('PT_Root_UI_Regular'), url('/fonts/PT_Root_UI/PT_Root_UI_Regular.woff2') format('woff2'), url('fonts/PT_Root_UI/PT_Root_UI_Regular.woff') format('woff'), url('fonts/PT_Root_UI/PT_Root_UI_Regular.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'PT_Root_UI_Bold';
+    src: local('PT_Root_UI_Bold'), local('PT_Root_UI_Bold'), url('/fonts/PT_Root_UI/PT_Root_UI_Bold.woff2') format('woff2'), url('fonts/PT_Root_UI/PT_Root_UI_Bold.woff') format('woff'), url('fonts/PT_Root_UI/PT_Root_UI_Bold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'TT_Firs_Bold';
+    src: url("../fonts/TT_Firs/TT_Firs_Bold.otf") format("opentype");
+    font-weight: 600;
+    font-style: normal;
+}

@@ -1,168 +1,564 @@
 <template>
   <div id="app">   
-    <header class="header">   
-      <div class="alert">
-        В данный момент Вы находитесь на beta-версии сайта “Родники Удмуртии”
-        <div class="close"></div>
-      </div>
-      <div class="container"> 
-        <div class="lang">
-          <a class="lang-link lang-link__active" >Рус</a>
-          <a class="lang-link lang-link__active" >Удм</a>
+     <div class="alert" v-if="isAlert">
+        <div class="container">
+          <div class="alert-wrap">
+            В данный момент Вы находитесь на beta-версии сайта “Родники Удмуртии”
+            <div class="close" @click="isAlert=!isAlert"><img src="assets/svg/cross.svg" alt="Vue Logo" height="9" width="9"> </div>
+          </div>
         </div>
-        <img src="assets/svg/logotype.svg" alt="Vue Logo" height="36" width="75"> 
-        <a href="#" class="addbutton">
-          <span>Добавить историю</span>
-        </a>     
+      </div>
+    <header class="header">
+      <div class="container"> 
+        <div class="header-flex"> 
+          <div class="lang">
+            <a class="lang-link lang-link__active" >Рус</a>
+            <a class="lang-link" >Удм</a>
+          </div>
+          <a href="/">
+            <img src="assets/svg/logotype.svg" alt="Vue Logo" class="logotype" height="48"> 
+          </a>
+          <a href="/addhistory" class="addbutton">
+            <span>Добавить историю</span>
+          </a>     
+        </div>
       </div>
     </header>
-    <main class="main">
-      <div class="container">
-        <div class="history">
-          <header class="main-header">
-            <h1>История Сергея Николаевича Селивановского</h1>
-            <div class="header-description">
-              <span class="header-category">личности</span>
-              <span class="header-date">15 августа, 2019</span>            
-            </div>
-            <img class="autor-image" src="assets/photo.jpg">
-          </header>
-          <div class="autor"> 
-            <img class="autor-image" src="assets/pick.jpg">         
-            <span class="autor-name">автор Сергей С.</span> 
-          </div>
-          <div class="autor-about">
-            <p>Я – Сергей Николаевич Селивановский – коренной житель Ижевска, прямой потомок оружейников. Доцент, много лет 
-            преподавал в Ижевском государственном техническом университете им. М. Т. Калашникова на кафедре конструирования 
-            радиоэлектронной аппаратуры. Написал учебник по английскому языку «Английский в шутках и анекдотах», который хранится 
-            в библиотеке Конгресса США. До 80 лет трудился на заводе «Аксион». </p>
-            <p>Любимое увлечение детства сделало меня историком и краеведом. Выпустил два сборника с ценными фотографиями. 
-            Также веду свой блог, посвящённый истории Ижевска. Но обо всем по порядку. </p>
-          </div>
-          <div class="article">
-            <h2>Как трофейный фотоаппарат пробудил любовь к истории</h2>
-            <p> Началось все с того, что в 1949 году папа подарил мне немецкий фотоаппарат «Ретина кодак». 
-               Тогда мне было 12 лет. Первыми моделями стали брат и сестра, живность во дворе. Тогда наша семья жила 
-               в деревянном доме, где сейчас располагается проходная мотозавода. Потом я немного осмелел и вышел снимать на улицу. </p>
-            <p>Гулял по городу и фотографировал. Прятал фотоаппарат под пальто, выбирал объект и снимал. 
-              Что такое фотография? Это застывший момент истории, неопровержимый факт. Там люди, здания, какое-то событие.</p>
-            <p> Тогда за фотографии завода могли и наказать по всей строгости закона. По истечении времени все 
-              снимки оказались исторически ценными. Так я начал коллекционировать старые фотографии Ижевска. </p>
-            <p> Серьезно увлекся историей уже после 60 лет. Начал писать статьи на исторические темы. Хотя в школе 
-              у меня было два предмета, которые я ненавидел. Это химия, которую не понимал, и история. Но все изменилось
-               в один миг! Потом возникла идея написать книгу «Старый Ижевск: события и люди в объективе фотографов», 
-               то есть за основу взять фотографии. </p>
-            <p> В первую часть книги вошли 434 фотографии разных авторов, как профессионалов, так и любителей. 
-              Также в ней можно найти информацию о 998 людях. Мне поступил такой вал фотографий, что в скором времени появилась
-               и вторая часть книги.</p>
-            <p> Процесс продолжается и сейчас. Я уже набрал материалы на третью книгу.</p>
-            <p> Все свои книги я издаю на собственные деньги. Помогают мне в этом нелегком деле и родные, и знакомые. </p>
-            <p> Примерно год коплю, откладываю от пенсии. До 80 лет работал. Уволился в прошлом году. В течение года 
-              где-то накапливал 70 тысяч рублей. Потом родственники, знакомые помогали. Сейчас снова коплю.</p>
-            <p>На сегодняшний день работаю над книгой об ижевских радиолюбителях. Огромный труд получается.
-               Буквально вчера общался с известным радиолюбителем, он рассказал мне очень много интересных фактов, около 
-               20 фотографий дал.</p>
-            <p>Также готовлю большую статью о родословной своей семьи.  </p>
-            <h2>Главный казначей Ижевска, налоговый инспектор, оружейник, священнослужители</h2>
-            <p>Изучение родословной своей семьи – еще одно мое увлечение. Благодаря этому смог найти 
-            родственников в Санкт-Петербурге. Точнее, троюродная племянница, кандидат химических наук Елена
-             Борисовна Борова нашла меня сама. Неожиданное знакомство случилось лет 8-9 назад. </p>
-            <p>Ее прабабушка была родной сестрой моего дедушки, который работал казначеем. Она нашла меня через 
-            журнал «Иднакар», в котором была опубликована моя статья. Оказывается, она собрала материалы об истории 
-            Селивановских со времен Петра I. В своей работе описала где-то 800 человек. Только не могла найти
-             информацию дальше моего деда.</p>
-            <p>Мы обменялись фотографиями и историческими документами. Сейчас совместными усилиями пишем статью, 
-            в которой будет описано 10 поколений Селивановских.</p>
-            <p>В основном, наши предки были священниками. Это более 100 человек в Кировской области  Вятской губернии. 
-            2 июня этого года произошло значимое событие  в истории нашего рода. В селе Рождественское Кировской области 
-            рядом с разрушенной церковью открыли памятник. Один из наших предков более 20 лет был священником в этой церкви.  
-            Также его дети пошли по стопам отца.</p>
-            <p>Еще мы с Еленой Борисовной планируем инициировать возрождение этой церкви. </p>
-            <p>Многие мои родственники были выдающимися личностями и внесли свой вклад в развитие республики. </p>
-            <p>Мой дед был мастером на ствольной мастерской оружейного завода. За улучшение технологий он получил семь медалей 
-            до революции еще. Другой дед был казначеем. Родился в беднейшей семье, в которой воспитывались 14 детей. 
-            За счет таланта, настойчивости поднялся, сделал карьеру известного экономиста Вятской губернии.  
-            С 1909 до 1917 года возглавлял Ижевское казначейство. Потом до 1926-го был руководителем Управления 
-            местных финансов, работал с Наговицыным, который в своих письмах писал, что мой дед сделал многое для 
-            финансовой системы Вотской области.</p>
-            <p>Я изучил работу ижевского казначейства того времени. Тогда все было настолько строго, 
-            каждый работник имел револьвер, их охраняла конная полиция. Казначейство находилось по адресу Советская, 1 на первом этаже.</p>
-            <p>Учет был строжайший. В возрасте 56 лет дед умер во время отчетного доклада. Он настолько добросовестно
-            относился к своей работе. При советской  власти еще был кадровый голод, ему было не с кем работать. 
-              Если человек умел немного писать, его брали на работу.</p>
-            <p> А вот у моей бабушки Ольги Липхард были немецкие корни. Пока мне не удалось найти информацию 
-            об этой фамилии. Известно, что отец Ольги Липхард был налоговым инспектором в Сарапуле и долгие 
-            годы возглавлял эту службу. В царской России был очень хороший закон, направленный на сохранение 
-            генетического фонда. Когда умирал госслужащий, его старшему сыну предоставляли право бесплатного 
-            обучения в военном училище. Старшие дочери в семье также могли учиться в Институте благородных девиц.</p>
-            <p> И вот когда умер отец Ольги, ее старшей сестре выпало такое счастье. Они поехали в Петербург. 
-            Поскольку мать бабушки Крицкие жили здесь. Старшая сестра училась плохо и на собеседования вместо нее ходила младшая,
-            то есть моя бабушка. Она успешно справилась со всеми испытаниями. Осенью на учебу пошла старшая и вот тогда разоблачили
-              все это дело. В итоге на учебу приняли Ольгу.</p>
-            <p> После окончания учебы они вернулись на Вятку. Там Ольга Липхард познакомилась с 
-            Селивановским и вышла за него замуж. Потом его как финансового работника отправили в Глазов, 
-            он также работал в Селтах и Малмыже. Отец Сергея Николаевича родился уже в Малмыже.  </p>
-            <h2>Любовь к английскому языку или о дружбе с Лео</h2>
-            <p>Во 2-м классе я увлекся немецким языком, как раз война закончилась. Я себе письма писал якобы из Германии 
-            от отца-разведчика, друзья верили. К сожалению, бабушка Ольга меня не обучала. Хотя прекрасно знала французский,
-             немецкий, так как окончила Институт благородных девиц в Петербурге, так называемый институт ордена Святой Екатерины. 
-             Она скрывала это, была запугана после революции. Я сам варился в собственном соку.</p>
-            <p>В 5-м классе начали изучать английский язык, он показался мне странным и не понятным. Думал, что за язык? Написано одно, произносится другое, то ли дело в немецком. Постепенно я разобрался, начал получать пятерки. В техникуме тоже был хороший преподаватель. Давала много технических текстов. Когда поступил в институт, начал все лекции писать на английском языке. Это такой авантюризм был, который на учебу повлиял. Я не мог разобрать, что написал, получал тройки. Это дало мне очень многое для навыков перевода с русского языка. 
-            <p>В течение 25 лет преподавал технический английский ученикам № 25 школы Ижевска. Вроде звали на временную работу, 
-            но получилось, что более 20 лет проработал. Чтобы заинтересовать учеников, я применял на своих 
-            уроках английский юмор. В конце уроков раздавал карточки с анекдотами. Его надо было перевести, 
-            оценить юмор и объяснить, в чем соль. Потому что он отличается от нашего. Там большинство анекдотов 
-            основано на многозначности слов. У нас одно слово имеет 2-3 значения, а у них до 200.</p>
-            <p>На моих уроках никогда не было проблем с дисциплиной и оценками. Мои ученики, которые уже сами стали
-             пенсионерами, до сих пор помнят язык. Потом я написал книгу о методике применения юмора при изучении
-              иностранных языков и назвал ее «Английский через юмор». </p>
-            <p>Она мгновенно разошлась по учителям и преподавателям. Здесь 800 поговорок, анекдотов, загадок. Наконец,
-            я обнаглел и послал эту книгу в Америку, Германию, Англию, Индию, Китай, Москву. Думал, большие гонорары хоть 
-            раз заработаю. Из Америки пришел контракт. Из гонорара 5 долларов заплатили. В Москве издали ее 10 тыс. экземпляров. </p>
-            <p>Кроме того, в изучении английского мне помог друг, музыкант Леопольд Панчак, который являлся носителем языка.  </p>
-            <p>Наша дружба с Леопольдом Панчаком длилась более 20 лет. Он русский, родился в Шанхае. Потом вернулся
-            на родину и не знал русского языка. В 1948 году его отправили в Арск (Татарстан). Там он познакомился с ижевскими 
-            композиторами, которые пригласили его в Удмуртию. Мы могли с ним беседовать часами напролет.</p>
-            <h2>Работа отвлекает от грустных мыслей</h2>
-            <p>Если хочешь все успевать, надо рано вставать. Летом я уже в 4 часа бодрствую. Этот год принес большую утрату в мою жизнь, 29 июня умерла жена. Мы прожили вместе 57 лет. А знакомы были 67.
-             Мы еще в техникуме познакомились. Работа отвлекает меня от грустных мыслей.</p>
-            <blockquote> 
-              <strong>Если хочешь все успевать, надо рано вставать</strong>
-              <cite>Сергей С.</cite>
-            </blockquote>
-          </div>
-        </div>
-      </div>
-    </main>
-    <aside class="aside">
-      <div class="aside-title">Добавьте свою историю о событии или человеке!</div>
-      <a href="#" class="aside-button">ДОБАВИТЬ свою ИСТОРИЮ</a>
-    </aside>
+    <router-view></router-view>    
     <footer class="footer">
-      Родники Удмуртии, 2019
-Все права защищены законодательством РФ. При использовании любых материалов сайта ссылка обязательна, в Интернете обязательна гиперссылка на ресурс. Иное является незаконным использованием и подлежит правовым последствиям. 
-Проект посвящен столетию Удмуртской Республики.    
+       <div class="container">
+          <div class="footer-flex">
+            <div class="footer-col">
+              <p>Родники Удмуртии, 2019</p>
+              <p>Все права защищены законодательством РФ. При использовании любых материалов
+              сайта ссылка обязательна, в Интернете обязательна гиперссылка на ресурс.
+                Иное является незаконным использованием и подлежит правовым последствиям. </p>
+              <p>Проект посвящен столетию Удмуртской Республики.</p>  
+              <img src="assets/svg/footerlogo.svg" alt="Vue Logo" height="44" width="200" class="footer-logo">   
+            </div>            
+            <div class="footer-menu">
+              <div class="menu-block">
+                <div class="footer-menu-title">Родники удмуртии</div>
+                <ul>
+                  <li class="footer-menu-list">
+                    <a href="#" class="footer-menu-link">История</a>
+                  </li>   
+                  <li class="footer-menu-list">  
+                    <a href="#" class="footer-menu-link">О проекте</a>
+                  </li> 
+                  <li class="footer-menu-list">   
+                    <a href="#" class="footer-menu-link">контакты</a>
+                  </li> 
+                  <li class="footer-menu-list">   
+                    <a href="/agreement" class="footer-menu-link">соглашение</a>
+                  </li>              
+                </ul>              
+              </div>
+              <div class="menu-block">
+                <div class="footer-menu-title">Другие проекты</div>
+                <ul>
+                  <li class="footer-menu-list">
+                    <a href="#" class="footer-menu-link"> столетие удмуртии</a>
+                  </li>   
+                  <li class="footer-menu-list">  
+                    <a href="#" class="footer-menu-link">#про100летудмуртии</a>
+                  </li> 
+                  <li class="footer-menu-list">   
+                    <a href="#" class="footer-menu-link">Афиша удмуртии</a>
+                  </li> 
+                  <li class="footer-menu-list">   
+                    <a href="#" class="footer-menu-link">ДАУР</a>
+                  </li>              
+                </ul>         
+              </div>
+            </div>
+          </div>
+          <div class="footer-flex footer-flex__center">
+            <div class="copyright">
+              © Родники Удмуртии, 2019
+            </div>          
+            <a href="http://picom.ru/" target="_blank" class="picom">Разработка — Picom</a>          
+            <img src="assets/svg/heart.svg" alt="Vue Logo" height="16" width="16"  class="heart">  
+          </div>
+          <div class="footer-alert" v-if="coocies">
+            <p>Мы используем cookie-файлы для наилучшего представления нашего сайта. Продолжая использовать этот сайт, 
+            Вы соглашаетесь с использованием cookie-файлов.</p>
+            <a href="#" class="footer-alert-close" @click="coocies=!coocies">OK</a>
+          </div>
+      </div>
     </footer> 
   </div>
 </template>
 
 <script>
 import Home from './components/Home.vue'
+import MyAside from './components/my-aside.vue'
+import Addhistory from './components/Addhistory.vue'
+import Agreement from './components/Agreement.vue'
 
 export default {
   name: 'app',
   components: {
-    Home
+    Home,
+    MyAside,
+    Addhistory,
+    Agreement
+  },
+  data(){
+    return{
+      isAlert: true,
+      coocies: true
+    }
   }
 }
+
 </script>
+
 
 <style>
 *{
   margin: 0;
   padding: 0;
 }
+#app{
+  flex-direction:column;
+  min-height: 100vh;
+  justify-content: space-between;
+  width: 100%; 
+}
+body{
+  font-family: 'PT_Root_UI', Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  margin:0 auto;
+  color: #282828;
+  display: flex;
+   
+}
 .container{
  padding: 0 24px;
+ margin: 0 auto; 
 }
+@media(min-width: 768px){
+  .container{
+    padding: 0 104px;   
+  }
+}
+@media(min-width: 1024px){
+  .container{
+    padding: 0;   
+    margin: 0 auto;
+    position: relative;
+    max-width: 866px;
+  }
+}
+@media(min-width: 1440px){  
+  .container{
+    max-width: 1260px;
+  }
+}
+@media(min-width: 1920px){  
+  .container{
+    max-width: 1505px;
+  }
+}
+.alert{
+  background: #18305E;
+  color: #fff;
+  padding-top: 20px;
+  padding-bottom: 14px;
+  position: relative;
+}
+.alert-wrap{
+  position: relative;
+  text-align: center;
+}
+.close{
+  position: absolute;
+  top: -10px;
+  right: 10px;
+}
+
+@media(min-width: 1440px){  
+  .close{
+    right: -50px;
+  }
+}
+.header{
+  border-bottom: 1px solid  #E6E6E7;
+  padding: 8px 0;
+}
+@media(min-width: 1024px){
+  .header{  
+    padding-top: 17px;
+    padding-bottom: 0;
+  }
+}
+.header-flex{
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+@media(min-width: 768px){
+  .logotype{
+    width: 62px;
+    height: 39px;
+  }
+}
+@media(min-width: 1024px){
+  .logotype{
+    width: 124px;
+    height: 95px;
+  }
+}
+
+.lang-link{
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 10px;
+  line-height: 14px;
+  display:block;
+  position: relative;
+  text-decoration: none;
+  transition: border .3s;
+  margin: 0 8px;
+  font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
+  font-weight: 600;
+}
+
+@media(min-width: 768px){
+  .lang-link{
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0 12px;
+  }
+}
+
+.lang-link:after{
+  content: '';
+  height: 1px;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 39px;
+  transition: background .3s;
+}
+.lang-link__active{
+  color: #FF4646;
+}
+.lang-link__active:after{
+  background:  #FF4646;
+}
+
+@media(min-width: 768px){
+  .lang-link__active:after{
+    top: 43px;  
+  }
+}
+@media(min-width: 1024px){
+  .lang-link__active:after{
+    top: 62px; 
+  }
+}
+.lang{
+  display: flex;
+  margin: 0 -8px;
+  position: absolute;
+  left: 0;  
+}
+
+@media(min-width: 768px){
+  .lang{
+    margin: 0 -12px;    
+  }
+}
+.addbutton{
+  border: 0.444881px solid #FF4646;
+  display: block;
+  width: 42px;
+  height: 32px;
+  position: absolute;
+  right: 0;
+}
+@media(min-width: 768px){
+  .addbutton{
+    width: 200px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+}
+
+@media(min-width: 1440px){
+  .addbutton{
+    width: 266px;
+    height: 48px;
+  }
+}
+.addbutton:before, .addbutton:after{
+  content: '';
+  display: block;
+  position: absolute;
+  background: #FF4646;
+}
+.addbutton:before{
+  content: '';
+  width: 2px;
+  height: 12px;
+  top: 10px;
+  left: 20px;
+}
+.addbutton:after{
+  content: '';
+  width: 12px;
+  height: 2px;
+  top: 15px;
+  left: 15px;
+}
+
+@media(min-width: 768px){
+  .addbutton:before, .addbutton:after{
+    display: none;
+  }
+}
+
+.addbutton span{
+  display: none;
+}
+
+@media(min-width: 768px){
+  .addbutton span{
+    display: block;
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #FF4646;
+    font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+  }
+}
+.footer{
+  background: #161616;
+  padding: 28px 0;
+}
+@media(min-width: 768px){
+  .footer{   
+    padding-top: 50px;
+  }
+}
+@media(min-width: 1024px){
+  .footer{   
+    padding: 42px;
+  }
+}
+
+@media(min-width: 1024px){
+  .footer-flex{   
+    display: flex;
+    align-items:flex-start;
+  }
+}
+@media(min-width: 1024px){
+  .footer-flex__center{
+    justify-content: center;
+    position: relative;
+    margin: 33px 0;
+  }
+}
+@media(min-width: 1024px){
+  .footer-col{   
+    width: 50%;
+    box-sizing: border-box;
+    padding-right: 70px;
+  }
+}
+.footer p{
+  color: #FFFFFF;
+  opacity: 0.6;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 20px 0;
+}
+@media(min-width: 768px){
+  .footer p{
+    font-size: 16px;
+    line-height: 24px;
+    color: #6D6D6D;
+    opacity: 1;
+  }
+}
+@media(min-width: 768px){
+  .footer-logo{
+    margin-top: 34px;
+  }
+}
+@media(min-width: 1024px){
+  .footer-logo{
+    margin-top: 11px;
+  }
+}
+.footer-menu{
+  margin: 49px 0;
+  font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+@media(min-width: 768px){
+  .footer-menu{
+    display: flex;
+    margin: 65px -8px 75px -8px;
+  }
+}
+@media(min-width: 1024px){
+  .footer-menu{   
+    width: 50%;
+    margin: 20px -8px;
+  }
+}
+.menu-block{
+   margin: 42px 0;
+}
+@media(min-width: 768px){
+  .menu-block{
+    width: calc(50% - 16px);
+    margin: 0 8px;
+  }
+}
+.footer-menu-title{
+  margin-bottom: 20px;
+}
+.footer-menu-link{
+  opacity: 0.6;
+  text-decoration: none;
+  color:  #FFFFFF;  
+}
+@media(min-width: 768px){
+  .footer-menu-link{
+    font-size: 14px;
+    line-height: 14px;
+  }
+}
+
+.footer-menu-list{
+  list-style: none;
+  margin: 20px 0;
+}
+
+@media(min-width: 768px){
+  .footer-menu-list{
+    list-style: none;
+    margin: 25px 0;
+  }
+}
+
+.copyright{
+  font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  opacity: 0.6;
+  text-align: center;
+  margin: 20px 0;
+}
+@media(min-width: 768px){
+  .copyright{
+    margin: 31px;
+  }
+}
+@media(min-width: 1024px){
+  .copyright{
+    margin: 0;
+    position: absolute;
+    left: 0;
+  }
+}
+.picom{
+  color: #fff;
+  font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  margin: 20px 0;
+}
+@media(min-width: 768px){
+  .picom{
+    margin: 39px 0;
+  }
+}
+@media(min-width: 1024px){
+  .picom{
+    margin: 0;
+    position: absolute;
+    right: 0;
+  }
+}
+.heart{
+  position: relative;
+  margin: 30px auto 49px auto;  
+  display: block;
+}
+@media(min-width: 768px){
+  .heart{
+    width: 22px;
+    height: 22px;
+  }
+}
+@media(min-width: 1024px){
+  .heart{
+    margin: 0;
+  }
+}
+.footer-alert{
+  background: #FFFFFF;
+  padding: 20px;  
+  bottom: 25px;
+  left: 0; 
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #161616;
+}
+
+.footer-alert p{
+  font-family: 'PT_Root_UI', Arial, Helvetica, sans-serif;
+  color: #282828;
+  font-size: 14px;
+  line-height: 20px;
+  margin: 0;
+  opacity: 1;
+}
+.footer-alert-close{
+  font-family: 'PT_Root_UI', Arial, Helvetica, sans-serif;
+  border: 1px solid #FF4646;
+  padding: 17px 26px;
+  display: block;
+  width: 74px;
+  height: 48px;
+  box-sizing: border-box;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: 14px;
+  color: #FF4646;
+  text-decoration: none;
+  margin: 10px auto;
+  position: relative;
+}
+
 </style>
