@@ -4,7 +4,7 @@
         <div class="container">
           <div class="alert-wrap">
             В данный момент Вы находитесь на beta-версии сайта “Родники Удмуртии”
-            <div class="close" @click="isAlert=!isAlert"><img src="assets/svg/cross.svg" alt="Vue Logo" height="9" width="9"> </div>
+            <div class="close" @click.prevent="isAlert=!isAlert"><img src="assets/svg/cross.svg" alt="Vue Logo" height="9" width="9"> </div>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@
           <div class="footer-alert" v-if="coocies">
             <p>Мы используем cookie-файлы для наилучшего представления нашего сайта. Продолжая использовать этот сайт, 
             Вы соглашаетесь с использованием cookie-файлов.</p>
-            <a href="#" class="footer-alert-close" @click="coocies=!coocies">OK</a>
+            <a href="#" class="footer-alert-close" @click.prevent="coocies=!coocies">OK</a>
           </div>
       </div>
     </footer> 
@@ -91,18 +91,10 @@
 </template>
 
 <script>
-import Home from './components/Home.vue'
-import MyAside from './components/my-aside.vue'
-import Addhistory from './components/Addhistory.vue'
-import Agreement from './components/Agreement.vue'
 
 export default {
   name: 'app',
-  components: {
-    Home,
-    MyAside,
-    Addhistory,
-    Agreement
+  components: {    
   },
   data(){
     return{
