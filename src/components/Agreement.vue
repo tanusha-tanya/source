@@ -1,5 +1,5 @@
 <template>
-    <div id="agreement">
+    <div id="agreement" class="decor-wrap">
         <main class="main">
             <div class="container">
                 <h1>Пользовательское соглашение</h1>

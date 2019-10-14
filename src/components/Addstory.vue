@@ -1,7 +1,7 @@
 <template>
      <main class="main">
          <div class="container">
-            <a class="return" href="/" v-if="firstform||secondform">
+            <a class="return" @click.prevent="backform()" v-if="secondform">
                <img src="assets/svg/arrow.svg" width="15" height="12">
                <span>вернуться назад</span>
             </a>
@@ -13,20 +13,20 @@
             <form v-if="firstform">                  
                   <div class="form-block">
                      <h2 class="form-h2">Расскажите об авторе</h2>
-                     <input type="text" placeholder="Имя*" class="form-input" v-model="autorname">
-                     <input type="text" placeholder="Фамилия*" class="form-input" v-model="autorlastname">
-                     <input type="text" placeholder="Город или район*" class="form-input"  v-model="city">
-                     <textarea placeholder="информация об атворе" class="form-textarea" v-model="autorinformation"></textarea>
+                     <input type="text" placeholder="Имя*" class="form-input" v-model="autor.name">
+                     <input type="text" placeholder="Фамилия*" class="form-input" v-model="autor.lastname">
+                     <input type="text" placeholder="Город или район*" class="form-input"  v-model="autor.city">
+                     <textarea placeholder="информация об атворе" class="form-textarea" v-model="autor.information"></textarea>
                   </div>                  
                   <div class="form-block">
                      <h2 class="form-h2">Укажите контактную информацию</h2>
-                     <input type="text" placeholder="номер телефона*" class="form-input" v-model="phone">
+                     <input type="text" placeholder="номер телефона*" class="form-input" v-model="autor.phone">
                      <div class="form-description">Укажите номер телефона для связи с редакцией</div>
-                     <input type="text" placeholder="e-mail*" class="form-input" v-model="email">
+                     <input type="text" placeholder="e-mail*" class="form-input" v-model="autor.email">
                      <div class="form-description">Укажите e-mail для связи с редакцией</div>
                      <div class="form-flex">
-                        <input type="text" placeholder="ссылка на соц. сеть" class="input-short form-input"  v-model="link">
-                        <button type="submit" class="form-addbutton"></button>
+                        <input type="text" placeholder="ссылка на соц. сеть" class="input-short form-input"  v-model="autor.link">
+                        <button type="submit" class="form-addbutton" @click.prevent=""></button>
                      </div>
                      <div class="checkbox-block">
                         <input type="checkbox" id="agree-soc" class="input-checkbox" v-model="agreesoc">
@@ -64,29 +64,23 @@
                         <label for="agree-info" class="checkbox-label"> Я согласен с публикацей истории и сопутствующих к ней материалов и дополнительной информации</label>
                      </div>
                   </div>
-                  <div class="form-flex-big">
+                  <div class="form-flex-big">                     
                      <div class="form-block">
-                        <a class="return return__center" href="/">
-                           <img src="assets/svg/arrow.svg" width="15" height="12">
-                           <span>вернуться назад</span>
-                        </a>
-                     </div>
-                     <div class="form-block">
-                        <button type="submit" class="form-submit">Отправить на модерацию</button>
+                        <button type="submit" class="form-submit" @click.prevent="nextform()">Отправить на модерацию</button>
                      </div>
                   </div>
                </form>
                <form v-if="secondform">
                      <div class="form-block">
                         <h2 class="form-h2">Расскажите историю</h2>
-                        <input type="text" placeholder="Заголовок*" class="form-input"  v-model="title">
-                        <textarea placeholder="Текст истории*" class="form-textarea" v-model="text"></textarea>                        
+                        <input type="text" placeholder="Заголовок*" class="form-input"  v-model="story.title">
+                        <textarea placeholder="Текст истории*" class="form-textarea" v-model="story.text"></textarea>                        
                      </div>
                      <div class="form-block">
                         <h2 class="form-h2">Добавьте хронологию</h2>
                         <div class="form-flex">
-                           <textarea placeholder="Дата и описание" class="form-textarea textarea-short" v-model="text"></textarea> 
-                           <button type="submit" class="form-addbutton form-addbutton__long"></button>    
+                           <textarea placeholder="Дата и описание" class="form-textarea textarea-short" v-model="story.date"></textarea> 
+                           <button type="submit" class="form-addbutton form-addbutton__long" @click.prevent=""></button>    
                         </div>   
                         <div class="form-description">Укажите хронологию событий. Например, 1980 - Проходили Летние Олимпийские Игры в Москве. Для того чтобы добавить новую дату и описание нажмите кнопку “Плюс”.</div>                   
                      </div>
@@ -123,32 +117,32 @@
                      <div class="form-block">
                         <h2 class="form-h2">Укажите ссылки</h2>
                         <div class="form-flex">
-                        <input type="text" placeholder="ссылка на документ" class="input-short form-input" v-model="linkdoc">
-                        <button type="submit" class="form-addbutton"></button>
+                        <input type="text" placeholder="ссылка на документ" class="input-short form-input" v-model="link.doc">
+                        <button type="submit" class="form-addbutton" @click.prevent=""></button>
                      </div>
                      <div class="form-flex">
-                        <input type="text" placeholder="ссылка на фото" class="input-short form-input"  v-model="linkpick">
-                        <button type="submit" class="form-addbutton"></button>
+                        <input type="text" placeholder="ссылка на фото" class="input-short form-input"  v-model="link.pick">
+                        <button type="submit" class="form-addbutton" @click.prevent=""></button>
                      </div>
                      <div class="form-flex">
-                        <input type="text" placeholder="ссылка на аудио" class="input-short form-input" v-model="linkaudio">
-                        <button type="submit" class="form-addbutton"></button>
+                        <input type="text" placeholder="ссылка на аудио" class="input-short form-input" v-model="link.audio">
+                        <button type="submit" class="form-addbutton" @click.prevent=""></button>
                      </div>
                      <div class="form-flex">
-                        <input type="text" placeholder="ссылка на видео" class="input-short form-input" v-model="linkvideo">
-                        <button type="submit" class="form-addbutton"></button>
+                        <input type="text" placeholder="ссылка на видео" class="input-short form-input" v-model="link.video">
+                        <button type="submit" class="form-addbutton" @click.prevent=""></button>
                      </div> 
                      <div class="form-description">Укажите ссылку на видео, которое расположено на youtube.com или vimeo.com. Для добавления нескольких ссылок нажмите на кнопку “Плюс”.</div>                                       
                      </div>
                      <div class="form-flex-big">
                      <div class="form-block">
-                        <a class="return return__center" href="/">
+                        <a class="return return__center" @click.prevent="backform()">
                            <img src="assets/svg/arrow.svg" width="15" height="12">
                            <span>вернуться назад</span>
                         </a>
                      </div>
                      <div class="form-block">
-                        <button type="submit" class="form-submit">Продолжить</button>
+                        <button type="submit" class="form-submit" @click.prevent="addSuccess()">Продолжить</button>
                      </div>
                   </div>                  
                </form>
@@ -168,9 +162,50 @@ export default {
     return{
       firstform: true,
       secondform: false,
-      success: false
-    }
-  }
+      success: false,      
+      autor:{
+         name:'',
+         lastname:'',
+         city:'',
+         information:'',
+         phone:'',
+         email:'',
+         link: ''
+      },
+      agreesoc: false,
+      agreeagree: false,
+      agreeinfo: false,
+      story:{
+         title:'',
+         text:'',
+         date:''
+      },
+      link:{
+        doc: '',
+        pick: '',
+        audio: '',
+        video: '',
+      }
+    }    
+  },
+   methods:{
+      nextform(){
+         this.firstform = false;
+         this.secondform = true;
+         window.scrollTo(200,0)
+      },
+      addSuccess(){
+         this.secondform = false;
+         this.firstform = false;
+         this.success = true;
+         window.scrollTo(200,0)
+      },
+      backform(){
+         this.firstform = true;
+         this.secondform = false;         
+         window.scrollTo(200,0)
+      }
+   }
 }  
 </script>
 <style>

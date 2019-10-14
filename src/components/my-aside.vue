@@ -2,12 +2,35 @@
     <aside class="aside">
       <div class="aside-decor" style="background-image: url('../assets/svg/footer_bg.svg')"></div>
       <div class="container">
-        <div class="aside-title">Добавьте свою историю о&nbsp;событии или человеке!</div>
-        <a href="/addhistory" class="aside-button">ДОБАВИТЬ свою ИСТОРИЮ</a>
+        <div class="aside-title">{{langText}}</div>
+        <a href="/addstory" class="aside-button">{{addStory}}</a>
       </div>
     </aside>
 </template>
 
+<script>
+export default{
+  name: 'app',
+  computed:{
+    langText: function(){
+      if(this.$router.currentRoute.name != "udm"){
+        return 'Добавьте свою историю о  событии или человеке! '
+      }
+      else{
+         return 'Ватса ужрад яке адями сярысь аслэсьтыд историдэ!'
+      }     
+    },
+    addStory: function(){
+      if(this.$router.currentRoute.name != "udm"){
+        return 'Добавить свою историю'
+      }
+      else{
+         return 'Ватса аслэсьтыд историдэ'
+      }     
+    },
+  }
+} 
+</script>
 <style>
   .aside{
   background-color: #18305E;    

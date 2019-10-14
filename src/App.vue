@@ -11,15 +11,15 @@
     <header class="header">
       <div class="container"> 
         <div class="header-flex"> 
-          <div class="lang">
-            <a class="lang-link lang-link__active" >Рус</a>
-            <a class="lang-link" >Удм</a>
+          <div class="lang" v-if="!addform">
+            <a class="lang-link lang-link__active" href="/story" >Рус</a>
+            <a class="lang-link"  href="/udm">Удм</a>
           </div>
           <a href="/">
             <img src="assets/svg/logotype.svg" alt="Vue Logo" class="logotype" height="48"> 
           </a>
-          <a href="/addhistory" class="addbutton">
-            <span>Добавить историю</span>
+          <a href="/addstory" class="addbutton" v-if="!addform">
+            <span>{{addStory}}</span>
           </a>     
         </div>
       </div>
@@ -41,13 +41,13 @@
                 <div class="footer-menu-title">Родники удмуртии</div>
                 <ul>
                   <li class="footer-menu-list">
-                    <a href="#" class="footer-menu-link">История</a>
+                    <a href="/story" class="footer-menu-link">История</a>
                   </li>   
                   <li class="footer-menu-list">  
-                    <a href="#" class="footer-menu-link">О проекте</a>
+                    <a href="/project" class="footer-menu-link">О проекте</a>
                   </li> 
                   <li class="footer-menu-list">   
-                    <a href="#" class="footer-menu-link">контакты</a>
+                    <a href="/contact" class="footer-menu-link">контакты</a>
                   </li> 
                   <li class="footer-menu-list">   
                     <a href="/agreement" class="footer-menu-link">соглашение</a>
@@ -58,16 +58,16 @@
                 <div class="footer-menu-title">Другие проекты</div>
                 <ul>
                   <li class="footer-menu-list">
-                    <a href="#" class="footer-menu-link"> столетие удмуртии</a>
+                    <a href="/empty" class="footer-menu-link"> столетие удмуртии</a>
                   </li>   
                   <li class="footer-menu-list">  
-                    <a href="#" class="footer-menu-link">#про100летудмуртии</a>
+                    <a href="/empty" class="footer-menu-link">#про100летудмуртии</a>
                   </li> 
                   <li class="footer-menu-list">   
-                    <a href="#" class="footer-menu-link">Афиша удмуртии</a>
+                    <a href="/empty" class="footer-menu-link">Афиша удмуртии</a>
                   </li> 
                   <li class="footer-menu-list">   
-                    <a href="#" class="footer-menu-link">ДАУР</a>
+                    <a href="/empty" class="footer-menu-link">ДАУР</a>
                   </li>              
                 </ul>         
               </div>
@@ -99,7 +99,25 @@ export default {
   data(){
     return{
       isAlert: true,
-      coocies: true
+      coocies: true,      
+    }
+  },  
+  computed:{
+    addStory: function(){
+      if(this.$router.currentRoute.name != "udm"){
+        return 'добавить историю'
+      }
+      else{
+         return 'историез ватсаны'
+      }     
+    },
+    addform: function(){
+      if(this.$router.currentRoute.name != "addstory"){
+        return false
+      }
+      else{
+         return true
+      }     
     }
   }
 }
@@ -217,6 +235,7 @@ body{
   margin: 0 8px;
   font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
   font-weight: 600;
+  color: #282828;
 }
 
 @media(min-width: 768px){
