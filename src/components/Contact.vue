@@ -8,18 +8,17 @@
                         <span>мы на связи</span>
                     </div>
                     <div class="project-text">
-                        <p>Свяжитесь с нами! Мы хотим выслушать вас! Если у вас есть какие-либо вопросы или комментарии, не стесняйтесь обращаться к нам.
-                            Любые отзывы положительные!</p>
+                        <p>Вопросы по работе проекта вы можете задать его оператору – Информационному агентству «Удмуртия». Сообщайте о возможных ошибках, предлагайте свои идеи и улучшения – вместе мы сделаем «Родники Удмуртии» интереснее!</p>
                     </div>
                     <div class="contacts">
                         <div class="contacts-item">
                             <div class="contacts-title">Адрес</div>  
-                            ул. Пастухова, 13, офис 15   
+                            Россия, Ижевск, ул. Пастухова, 13, офис 15   
                         </div>
                         <div class="contacts-item">
                             <div class="contacts-title">время работы</div>
                             <div class="contact-day">
-                                <span>ПН-ПТ</span> 9:00 – 21:00  
+                                <span>ПН-ПТ</span> 9:00 – 18:00  
                             </div>
                              <div class="contact-day">
                                 <span>СБ </span>12:00 – 14:00 
@@ -41,12 +40,7 @@
                             <div class="contacts-title">И.о. директора</div>    
                             <div class="contacts-name">Дмитрий Викторович Винокуров</div> 
                             <a href="mailto:red@udmurt.media" class="contacts-link">red@udmurt.media </a>
-                        </div>
-                        <div class="contacts-item">
-                           <div class="contacts-title">Выпускающий редактор </div> 
-                            <div class="contacts-name">Майя Бывальцева</div>
-                            <a href="mailto:udmurt@udmurt.media" class="contacts-link">udmurt@udmurt.media</a>
-                        </div>  
+                        </div>                        
                         <div class="contacts-item">
                            <div class="contacts-title"> Редакция </div>   
                             <a href="mailto:red@udmurt.media" class="contacts-link">red@udmurt.media</a>
@@ -80,8 +74,7 @@
             <yandex-map :coords="coords" @click="onClick">
             <ymap-marker 
                 marker-id="123" 
-                :coords="coords"
-                :balloon-template="balloonTemplate"
+                :coords="coords"                
                 :icon="{layout: 'default#image', imageHref: markerIcon, imageSize: [48, 48]}"                    
             ></ymap-marker>
             </yandex-map>         
@@ -91,7 +84,7 @@
 </template>
 
 <script>
- import MyAside from './my-aside.vue'
+import MyAside from './my-aside.vue'
 export default {
     components: {   
     MyAside
@@ -100,12 +93,7 @@ export default {
     coords: [56.842270, 53.206064],    
     markerIcon: 'assets/svg/ico.svg' 
   }),
-  computed: {
-    balloonTemplate() {
-      return 
-    }
-  },
-  methods: {
+   methods: {
     onClick(e) {
       this.coords = e.get('coords');
     }

@@ -9,68 +9,74 @@
                <img src="assets/svg/arrow.svg" width="15" height="12">
                <span>на главную</span>
             </a>
-            <h1 class="form-title" v-if="firstform||secondform">Добавление истории</h1>                    
-            <form v-if="firstform">                  
-                  <div class="form-block">
-                     <h2 class="form-h2">Расскажите об авторе</h2>
-                     <input type="text" placeholder="Имя*" class="form-input" v-model="autor.name">
-                     <input type="text" placeholder="Фамилия*" class="form-input" v-model="autor.lastname">
-                     <input type="text" placeholder="Город или район*" class="form-input"  v-model="autor.city">
-                     <textarea placeholder="информация об атворе" class="form-textarea" v-model="autor.information"></textarea>
-                  </div>                  
-                  <div class="form-block">
-                     <h2 class="form-h2">Укажите контактную информацию</h2>
-                     <input type="text" placeholder="номер телефона*" class="form-input" v-model="autor.phone">
-                     <div class="form-description">Укажите номер телефона для связи с редакцией</div>
-                     <input type="text" placeholder="e-mail*" class="form-input" v-model="autor.email">
-                     <div class="form-description">Укажите e-mail для связи с редакцией</div>
-                     <div class="form-flex">
-                        <input type="text" placeholder="ссылка на соц. сеть" class="input-short form-input"  v-model="autor.link">
-                        <button type="submit" class="form-addbutton" @click.prevent=""></button>
-                     </div>
-                     <div class="checkbox-block">
-                        <input type="checkbox" id="agree-soc" class="input-checkbox" v-model="agreesoc">
-                        <label for="agree-soc" class="checkbox-label"> Разместить ссылку на персональную страницу в соц. сети на сайте</label>
-                     </div>
-                  </div>
-                  <div class="form-block">
-                     <h2 class="form-h2">Прикрепите фото автора</h2>
-                     <div class="file-block">
-                        <input type="file" class="file-input" id="picture">
-                        <label class="file-label" for="picture">
-                           <img class="form-image" src="assets/svg/photo.svg" width="42" height="34">
-                           <span>Фото</span>
-                        </label>
-                        <div class="filename"></div>
-                     </div>
-                     <div class="form-description">Прикрепляйте фотоматериалы в формате .jpg или .png. Максимальный размер изображения 20 мб.</div>
-                  </div>
-                  <div class="form-attention">
-                     <div class="attention-title">Важно!</div>
-                     <div class="attention-text">После отправки истории и ее последующей модерации 
-                     Вы можете дополнить или изменить историю. Для этого заново добавьте свою историю,
-                      выберите статус истории - Редактирование истории. Далее укажите название истории,
-                       которую хотите отредактировать, заполните поля и отправьте отредактированную
-                        историю на модерацию.
-                     </div>
-                  </div>
-                  <div class="form-block">
-                     <div class="checkbox-block">
-                        <input type="checkbox" id="agree-agree" class="input-checkbox" v-model="agreeagree">
-                        <label for="agree-agree" class="checkbox-label"> Я согласен с обработкой персональных данных согласно условиям <a href="/agreement" targe="_blank">Пользовательского соглашения</a></label>
-                     </div>
-                     <div class="checkbox-block">
-                        <input type="checkbox" id="agree-info" class="input-checkbox" v-model="agreeinfo">
-                        <label for="agree-info" class="checkbox-label"> Я согласен с публикацей истории и сопутствующих к ней материалов и дополнительной информации</label>
-                     </div>
-                  </div>
-                  <div class="form-flex-big">                     
+            <h1 class="form-title" v-if="firstform||secondform">Добавление истории</h1>    
+            <div class="form-red"  v-if="firstform||secondform">
+               <span>культурного портала родники удмуртии
+               </span>
+            </div>  
+            
+            <form>                        
+               <div v-if="firstform">                  
                      <div class="form-block">
-                        <button type="submit" class="form-submit" @click.prevent="nextform()">Отправить на модерацию</button>
+                        <h2 class="form-h2">Расскажите об авторе</h2>
+                        <input type="text" placeholder="Имя*" class="form-input" v-model="autor.name">
+                        <input type="text" placeholder="Фамилия*" class="form-input" v-model="autor.lastname">
+                        <input type="text" placeholder="Город или район*" class="form-input"  v-model="autor.city">
+                        <textarea placeholder="информация об авторе" class="form-textarea" v-model="autor.information"></textarea>
+                     </div>                  
+                     <div class="form-block">
+                        <h2 class="form-h2">Укажите контактную информацию</h2>
+                        <input type="text" placeholder="номер телефона*" class="form-input" v-model="autor.phone">
+                        <div class="form-description">Укажите номер телефона для связи с редакцией</div>
+                        <input type="text" placeholder="e-mail*" class="form-input" v-model="autor.email">
+                        <div class="form-description">Укажите e-mail для связи с редакцией</div>
+                        <div class="form-flex">
+                           <input type="text" placeholder="ссылка на соц. сеть" class="input-short form-input"  v-model="autor.link">
+                           <button type="button" class="form-addbutton" @click.prevent=""></button>
+                        </div>
+                        <div class="checkbox-block">
+                           <input type="checkbox" id="agree-soc" class="input-checkbox" v-model="agreesoc">
+                           <label for="agree-soc" class="checkbox-label"> Разместить ссылку на персональную страницу в соц. сети на сайте</label>
+                        </div>
                      </div>
-                  </div>
-               </form>
-               <form v-if="secondform">
+                     <div class="form-block">
+                        <h2 class="form-h2">Прикрепите фото автора</h2>
+                        <div class="file-block">
+                           <input type="file" class="file-input" id="picture" @change="previewFiles($event)" >
+                           <label class="file-label" for="picture">
+                              <img class="form-image" src="assets/svg/photo.svg" width="42" height="34">
+                              <span>Фото</span>
+                           </label>
+                           <div class="filename"></div>
+                        </div>
+                        <div class="form-description">Прикрепляйте фотоматериалы в формате .jpg или .png. Максимальный размер изображения 20 мб.</div>
+                     </div>
+                     <div class="form-attention">
+                        <div class="attention-title">Важно!</div>
+                        <div class="attention-text">После отправки истории и ее последующей модерации 
+                        Вы можете дополнить или изменить историю. Для этого заново добавьте свою историю,
+                        выберите статус истории - Редактирование истории. Далее укажите название истории,
+                        которую хотите отредактировать, заполните поля и отправьте отредактированную
+                           историю на модерацию.
+                        </div>
+                     </div>
+                     <div class="form-block">
+                        <div class="checkbox-block">
+                           <input type="checkbox" id="agree-agree" class="input-checkbox" v-model="agreeagree">
+                           <label for="agree-agree" class="checkbox-label"> Я согласен с обработкой персональных данных согласно условиям <a href="/agreement" targe="_blank">Пользовательского соглашения</a></label>
+                        </div>
+                        <div class="checkbox-block">
+                           <input type="checkbox" id="agree-info" class="input-checkbox" v-model="agreeinfo">
+                           <label for="agree-info" class="checkbox-label"> Я согласен с публикацей истории и сопутствующих к ней материалов и дополнительной информации</label>
+                        </div>
+                     </div>
+                     <div class="form-flex-big">                     
+                        <div class="form-block">
+                           <button type="button" class="form-submit" @click.prevent="nextform()" accept=".png, .jpg, .jpeg">Продолжить</button>
+                        </div>
+                     </div>
+                  </div>               
+               <div v-if="secondform">
                      <div class="form-block">
                         <h2 class="form-h2">Расскажите историю</h2>
                         <input type="text" placeholder="Заголовок*" class="form-input"  v-model="story.title">
@@ -80,7 +86,7 @@
                         <h2 class="form-h2">Добавьте хронологию</h2>
                         <div class="form-flex">
                            <textarea placeholder="Дата и описание" class="form-textarea textarea-short" v-model="story.date"></textarea> 
-                           <button type="submit" class="form-addbutton form-addbutton__long" @click.prevent=""></button>    
+                           <button type="button" class="form-addbutton form-addbutton__long" @click.prevent=""></button>    
                         </div>   
                         <div class="form-description">Укажите хронологию событий. Например, 1980 - Проходили Летние Олимпийские Игры в Москве. Для того чтобы добавить новую дату и описание нажмите кнопку “Плюс”.</div>                   
                      </div>
@@ -117,20 +123,20 @@
                      <div class="form-block">
                         <h2 class="form-h2">Укажите ссылки</h2>
                         <div class="form-flex">
-                        <input type="text" placeholder="ссылка на документ" class="input-short form-input" v-model="link.doc">
-                        <button type="submit" class="form-addbutton" @click.prevent=""></button>
+                        <input type="text" placeholder="ссылка на документ" class="input-short form-input" v-model="story.link.doc">
+                        <button type="button" class="form-addbutton" @click.prevent=""></button>
                      </div>
                      <div class="form-flex">
-                        <input type="text" placeholder="ссылка на фото" class="input-short form-input"  v-model="link.pick">
-                        <button type="submit" class="form-addbutton" @click.prevent=""></button>
+                        <input type="text" placeholder="ссылка на фото" class="input-short form-input"  v-model="story.link.pick">
+                        <button type="button" class="form-addbutton" @click.prevent=""></button>
                      </div>
                      <div class="form-flex">
-                        <input type="text" placeholder="ссылка на аудио" class="input-short form-input" v-model="link.audio">
-                        <button type="submit" class="form-addbutton" @click.prevent=""></button>
+                        <input type="text" placeholder="ссылка на аудио" class="input-short form-input" v-model="story.link.audio">
+                        <button type="button" class="form-addbutton" @click.prevent=""></button>
                      </div>
                      <div class="form-flex">
-                        <input type="text" placeholder="ссылка на видео" class="input-short form-input" v-model="link.video">
-                        <button type="submit" class="form-addbutton" @click.prevent=""></button>
+                        <input type="text" placeholder="ссылка на видео" class="input-short form-input" v-model="story.link.video">
+                        <button type="button" class="form-addbutton" @click.prevent=""></button>
                      </div> 
                      <div class="form-description">Укажите ссылку на видео, которое расположено на youtube.com или vimeo.com. Для добавления нескольких ссылок нажмите на кнопку “Плюс”.</div>                                       
                      </div>
@@ -142,8 +148,9 @@
                         </a>
                      </div>
                      <div class="form-block">
-                        <button type="submit" class="form-submit" @click.prevent="addSuccess()">Продолжить</button>
+                        <button type="submit" class="form-submit" @click.prevent="addSuccess()">Отправить на модерацию</button>
                      </div>
+                  </div> 
                   </div>                  
                </form>
                <div v-if="success" class="success">
@@ -157,9 +164,10 @@
 </template>
 
 <script>
+
 export default {
    data(){
-    return{
+    return{     
       firstform: true,
       secondform: false,
       success: false,      
@@ -178,29 +186,38 @@ export default {
       story:{
          title:'',
          text:'',
-         date:''
+         date:'',
+         link:{
+         doc: '',
+         pick: '',
+         audio: '',
+         video: '',
+         }
       },
-      link:{
-        doc: '',
-        pick: '',
-        audio: '',
-        video: '',
-      }
+      dataForm:{
+         autor: '',
+         story: ' '
+      },         
     }    
-  },
-   methods:{
+  }, 
+   methods:{   
+      previewFiles(event) {
+         console.log(event.target.value)
+      },  
       nextform(){
+         this.dataForm.autor = this.autor                      
          this.firstform = false;
          this.secondform = true;
          window.scrollTo(200,0)
       },
       addSuccess(){
+         this.dataForm.story = this.story         
          this.secondform = false;
          this.firstform = false;
          this.success = true;
          window.scrollTo(200,0)
       },
-      backform(){
+      backform(){         
          this.firstform = true;
          this.secondform = false;         
          window.scrollTo(200,0)
@@ -271,7 +288,27 @@ export default {
       margin-bottom: 35px;
    }
 }
-
+.form-red{
+       color: #FF4646;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 14px;
+    line-height: 14px;
+    font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
+        display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+   .form-red:before{
+        content: '';
+        display: block;
+        width: 8px;
+        height: 8px;
+        background: #FF4646;
+        transform: rotate(-45deg);   
+        margin-right: 15px;     
+    }
    .form-block{
       margin: 42px 0;
       max-width: 400px;

@@ -1,0 +1,123 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vuefire@next",
+        "scope": null,
+        "escapedName": "vuefire",
+        "name": "vuefire",
+        "rawSpec": "next",
+        "spec": "next",
+        "type": "tag"
+      },
+      "C:\\Users\\picom\\web\\source"
+    ]
+  ],
+  "_from": "vuefire@next",
+  "_hasShrinkwrap": false,
+  "_id": "vuefire@2.2.0-alpha.0",
+  "_inCache": true,
+  "_location": "/vuefire",
+  "_nodeVersion": "10.16.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/vuefire_2.2.0-alpha.0_1567090618366_0.25449910474155124"
+  },
+  "_npmUser": {
+    "name": "posva",
+    "email": "posva13@gmail.com"
+  },
+  "_npmVersion": "lerna/3.16.4/node@v10.16.1+x64 (darwin)",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vuefire@next",
+    "scope": null,
+    "escapedName": "vuefire",
+    "name": "vuefire",
+    "rawSpec": "next",
+    "spec": "next",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/vuefire/-/vuefire-2.2.0-alpha.0.tgz",
+  "_shasum": "554ef8c2b7735aa2d4789f40fed6ab5fe2c014ac",
+  "_shrinkwrap": null,
+  "_spec": "vuefire@next",
+  "_where": "C:\\Users\\picom\\web\\source",
+  "author": {
+    "name": "Eduardo San Martin Morote"
+  },
+  "browser": "dist/vuefire.esm.js",
+  "bugs": {
+    "url": "https://github.com/vuejs/vuefire/issues"
+  },
+  "dependencies": {
+    "@posva/vuefire-core": "^2.2.0-alpha.0"
+  },
+  "description": "Firestore bindings for Vue.js",
+  "devDependencies": {
+    "@posva/vuefire-test-helpers": "^1.3.0-alpha.0"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-nuPr1JJdOmy8zceOmmi7o7H7Iz7/IBHib/+hUHeDK6gVC1DE1mmoSgiy0CwL7bmTJ+SFd30F8lA6TeKNCBrNMg==",
+    "shasum": "554ef8c2b7735aa2d4789f40fed6ab5fe2c014ac",
+    "tarball": "https://registry.npmjs.org/vuefire/-/vuefire-2.2.0-alpha.0.tgz",
+    "fileCount": 15,
+    "unpackedSize": 111698,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJdZ+e7CRA9TVsSAnZWagAAaOUP/0gZoA4U3KOoHyLO+cGm\nSdjv9Jr+4y43bs0xjJtRLlmpL8uG9qK6YlnUqqpk5wPlknXVzi2Lc/Hw6tLm\n1C7U49FvhQJUHOgHoPdf15bmQ9BM9ah9fKSEg8SqkTpFvZTYx6jC4fpiqTLh\nCmVlmMKHZuouIuTBB+3xAHxzTCiciWSyZvZ3rWpkcP9pM/+6hVT152VIAHN5\nTCQKG+1a1RVZcvUJ/cSEX7veo9EgSjb3z4PAsTUuDKcQpLq60xH5Fl7PgYc1\nsDzYYcWGm92L8Y+5Nx6oePW7Jfi7QEY3gc0BDPEyGQQpA+ZeHyV8R4/oDr1G\nNsEqaTrpLBhtg/blIaOH8nxjqajwz/lK2DSlrySc97qyCpE4ZDGng0BRwiyV\ne8HtpxLtTFzsU9k0wFcBRLo39FwX+A/WjKWkb4QMh+gI+Hazv3ni+IMcifET\nhM5Q2FglcbVORxOGOQPZXoL46oNdOi7syTECoOic3SjOMGLzaUQGYX41rv0S\ni04ayPcnInLVQ/spj93XNSt7v6i+SyAFxSQTUGsMD3ZiqBx3+BNxxlmb+3No\nBURzjh1p0YknYRS/Ad6ayEyWngB1ZaECOtcwaK37Dh6lGUgdVjYEmBsEmha8\nDnCa9370Hdk5cW7DDPhgeJL6ntWlsTmLvAIPw9d7TaVzbnJkeh6Oll05foYi\nWNh+\r\n=5OI3\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "gitHead": "cd6d0f6a471187b4d34215212a575c90386c611f",
+  "homepage": "https://github.com/vuejs/vuefire#readme",
+  "keywords": [
+    "vue",
+    "plugin",
+    "mixin",
+    "firebase",
+    "cloud",
+    "database",
+    "google",
+    "firestore",
+    "realtime"
+  ],
+  "license": "MIT",
+  "main": "dist/vuefire.common.js",
+  "maintainers": [
+    {
+      "name": "posva",
+      "email": "posva13@gmail.com"
+    },
+    {
+      "name": "yyx990803",
+      "email": "yyx990803@gmail.com"
+    }
+  ],
+  "module": "dist/vuefire.esm.js",
+  "name": "vuefire",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "firebase": ">=4.0.0"
+  },
+  "readme": "# Vuefire [![Build Status](https://badgen.net/circleci/github/vuejs/vuefire)](https://circleci.com/gh/vuejs/vuefire) [![npm package](https://badgen.net/npm/v/vuefire)](https://www.npmjs.com/package/vuefire) [![coverage](https://badgen.net/codecov/c/github/vuejs/vuefire)](https://codecov.io/github/vuejs/vuefire)\n\n> Vue.js bindings for Firebase Cloud Firestore and the Realtime Database\n\n[Documentation](https://vuefire.vuejs.org/vuefire)\n\nVueFire makes it super easy to bind firestore collections and documents and keep your local data always up to date with their remote versions.\n\n## Firebase Realtime database\n\n## Installation\n\n```sh\nyarn add firebase vuefire\n# or\nnpm i firebase vuefire\n```\n\n## Usage\n\n_Make sure to check the documentation for full usage instructions and tips_\n\n### `firestore` option\n\nVuefire adds a new `firestore` option to any component. Like `data`, it can be a function that returns an object too.\nMake sure to create any property added to `firestore` in `data` as well, like `todos` and `currentTodo` in the following example:\n\n```js\nimport { firestorePlugin } from 'vuefire'\n\nVue.use(firestorePlugin)\n\nnew Vue({\n  data: {\n    // use an array for collection\n    todos: [],\n    // and null for documents\n    currentTodo: null,\n  },\n  firestore: {\n    todos: db.collection('todos'),\n    currentTodo: db.collection('todos').doc('1'),\n  },\n})\n```\n\n### `$bind` and `$unbind`\n\nVuefire globally adds `$bind` and `$unbind` so you can programatically bind and unbind collections/documents/queries to an existing property in your Vue application:\n\n```js\n// TodoList.vue\nexport default {\n  data: () => ({ todos: [] }),\n  created() {\n    // this unbinds any previously bound reference\n    this.$bind('todos', db.collection('todos')).then(todos => {\n      this.todos === todos\n      // todos are ready to be used\n      // if it contained any reference to other document or collection, the\n      // promise will wait for those references to be fetched as well\n\n      // you can unbind a property anytime you want\n      // this will be done automatically when the component is destroyed\n      this.$unbind('todos')\n    })\n  },\n}\n```\n\n**Tips**:\n\n- Use an empty array `[]` as the initial value for a property that holds a collection to make `v-for` always work.\n- Use `null` for documents so you can wrap content with a simple `v-if` (ref vue guide)\n\n## References Normalization\n\nIn Cloud Firestore you can [reference other documents inside of documents](https://vuefire.vuejs.org/vuefire/binding-subscriptions.html#using-the-data-bound-by-vuefire). By default VueFire will automatically bind up to one nested references.\n\n## Contributing\n\nClone the repo, then:\n\n```sh\n$ yarn\n$ yarn test\n```\n\n## License\n\n[MIT](http://opensource.org/licenses/MIT)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuejs/vuefire.git"
+  },
+  "scripts": {
+    "build": "rollup -c ../../rollup.config.js",
+    "dev": "yarn run test:unit --watchAll",
+    "lint": "eslint --color --ext=js,ts src __tests__",
+    "postversion": "yarn run build",
+    "pretest": "yarn run lint",
+    "test": "yarn run build && yarn run test:unit",
+    "test:unit": "jest"
+  },
+  "sideEffects": false,
+  "types": "dist/packages/vuefire/src",
+  "unpkg": "dist/vuefire.js",
+  "version": "2.2.0-alpha.0"
+}

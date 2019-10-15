@@ -65,10 +65,7 @@
                   </li> 
                   <li class="footer-menu-list">   
                     <a href="/empty" class="footer-menu-link">Афиша удмуртии</a>
-                  </li> 
-                  <li class="footer-menu-list">   
-                    <a href="/empty" class="footer-menu-link">ДАУР</a>
-                  </li>              
+                  </li>                             
                 </ul>         
               </div>
             </div>

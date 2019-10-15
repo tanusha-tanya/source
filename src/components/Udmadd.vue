@@ -9,7 +9,11 @@
                <img src="assets/svg/arrow.svg" width="15" height="12">
                <span>на главную</span>
             </a>
-            <h1 class="form-title" v-if="firstform||secondform">Историез ватсан</h1>                    
+            <h1 class="form-title" v-if="firstform||secondform">Историез ватсан</h1>   
+            <div class="form-red"  v-if="firstform||secondform">
+               <span>"Удмуртиысь ошмесъёс" лулчеберет порталлэсь
+               </span>
+            </div>                          
             <form v-if="firstform">                  
                   <div class="form-block">
                      <h2 class="form-h2">Ужрад яке адями сярысь</h2>
