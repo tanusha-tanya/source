@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import Vuelidate from 'vuelidate'
-Vue.use(Vuelidate)
-
+import ymapPlugin from './vue-yandex-maps/dist/vue-yandex-maps.js'
+import Vuex from 'vuex'
+Vue.use(ymapPlugin) 
 Vue.config.productionTip = false
 
 new Vue({
   render: h => h(App),
-  router
+  router,  
+  Vuex
 }).$mount('#app')

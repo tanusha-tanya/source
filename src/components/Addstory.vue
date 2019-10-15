@@ -305,6 +305,7 @@ export default {
       font-weight: 600;
   }
 
+   
   @media(min-width:768px){
    .form-input{
       height: 64px;
@@ -409,10 +410,15 @@ export default {
     position: relative;   
     background: #fff;
     outline: none; 
-    margin: 13px 0 16px 0   
+    margin: 13px 0 16px 0 ;
+    transition: background .3s; 
 }
 .form-addbutton__long{
    height: 111px;
+}
+
+.form-addbutton:hover, .form-addbutton:focus{
+   background: #FF4646;
 }
 @media(min-width:768px){
    .form-addbutton{      
@@ -442,6 +448,12 @@ export default {
     display: block;
     position: absolute;
     background: #FF4646;
+    transition: background .3s;
+}
+
+.form-addbutton:hover:before, .form-addbutton:hover:after,
+ .form-addbutton:focus:after, .form-addbutton:focus:before{
+   background: #FFFFFF;
 }
 
 .form-addbutton:before {
@@ -683,6 +695,12 @@ export default {
    position: relative;
    margin: 0 auto 20px auto;
    display: block;
+   transition: background .3s, color .3s;
+}
+
+.form-submit:hover, .form-submit:focus{
+   color:  #fff;
+   background: #FF4646;
 }
 @media(min-width:768px){
    .form-submit{

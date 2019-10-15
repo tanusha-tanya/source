@@ -1,0 +1,107 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "vue-yandex-maps",
+        "scope": null,
+        "escapedName": "vue-yandex-maps",
+        "name": "vue-yandex-maps",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "C:\\Users\\picom\\web\\source"
+    ]
+  ],
+  "_from": "vue-yandex-maps@latest",
+  "_hasShrinkwrap": false,
+  "_id": "vue-yandex-maps@0.8.17",
+  "_inCache": true,
+  "_location": "/vue-yandex-maps",
+  "_nodeVersion": "10.12.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/vue-yandex-maps_0.8.17_1568726733038_0.4499004140438543"
+  },
+  "_npmUser": {
+    "name": "pnkbizz",
+    "email": "bizz.gc@gmail.com"
+  },
+  "_npmVersion": "6.4.1",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "vue-yandex-maps",
+    "scope": null,
+    "escapedName": "vue-yandex-maps",
+    "name": "vue-yandex-maps",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/vue-yandex-maps/-/vue-yandex-maps-0.8.17.tgz",
+  "_shasum": "9370c2db59d64543cc57c8fdcdec58a05349eb2e",
+  "_shrinkwrap": null,
+  "_spec": "vue-yandex-maps",
+  "_where": "C:\\Users\\picom\\web\\source",
+  "author": {
+    "name": "bizz.gc@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/PNKBizz/vue-yandex-map/issues"
+  },
+  "dependencies": {},
+  "description": "Yandex Maps component for VueJS.",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/preset-env": "^7.2.3",
+    "rollup": "^1.1.0",
+    "rollup-plugin-babel": "^4.3.0",
+    "rollup-plugin-terser": "^4.0.4",
+    "rollup-plugin-uglify": "^6.0.2",
+    "vuepress": "^1.0.0-alpha.48"
+  },
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-/YEoQrWAPzkeoKTamcgPE/Bw7Kcpkh6Rbo3Kq6/bGgguXQ82vjYeg5SrxAMvQrY4m04UK2mkspG5yJl9ZOcvnA==",
+    "shasum": "9370c2db59d64543cc57c8fdcdec58a05349eb2e",
+    "tarball": "https://registry.npmjs.org/vue-yandex-maps/-/vue-yandex-maps-0.8.17.tgz",
+    "fileCount": 93,
+    "unpackedSize": 1459251,
+    "npm-signature": "-----BEGIN PGP SIGNATURE-----\r\nVersion: OpenPGP.js v3.0.4\r\nComment: https://openpgpjs.org\r\n\r\nwsFcBAEBCAAQBQJdgN7NCRA9TVsSAnZWagAAZ9wP/3FvZNKY4HEY0nkz25PA\nlCORGytOmwfGtg+Iidh5WuFG9I9qofV9eEy2da2Xyzjf560C3J/s73j+xKTq\nNeZbRKYVK9pDBim9sae5Y38VqETD+cHqeXidopwY2o5HEj1DconWbrMrZV1D\nYpA9PgVbqsEaqPEDK6hXRlP4eZ8BVL+3hAO1lsoDf4ZxfibRrM6YDpr8cEe0\nAPKvMhXwJ0apkoA1FZnJaXYGrjQ3iLI5UDZ3sqLC5OzUMRbDxsvUyvrZ5AM9\n0/oV7k1ZC72xWdp6cIBTrS0ZvTmb1C7HrzgCRP4wTd8t7Rhb8j97HJvwEnJ4\nXP80Qu7mRj2UbzjZ27in6ZWBe56tptUlcnmmJiSOwBQ+sqkh91w7rwKHC7Am\ngG38Z8nnVINQdMDKtIWPO6ddbnMck/hVLkxzCaICf3yHlKwIVHYKE7v4edy6\n9d0/jDY+YBov56pj+mNhiw6zaQyHWH7SUjQWx0Wuf8z4Fb3AJrg20bztH+Oa\nYZv8T6rgxXOH1pV2tjRXnntxsqlvNrdiyg/xgLHoq+ZjyvA5NLxeto5dcq1L\nER39koFDdm0jIhkjpFgpCD7UaYGTF4JwXkCKN2sfFgYtncsOYc1lvdQivyyM\nJyCjXhLuvKyrC6X37Hj4MOW6wSgUO3LKdsK2v/fjIkunD6/Qw0dj7JnJzwBh\ndA4K\r\n=Mu7x\r\n-----END PGP SIGNATURE-----\r\n"
+  },
+  "gitHead": "f6eda3a9b4013d6d14ddaa55bad6b77340b443a4",
+  "homepage": "https://github.com/PNKBizz/vue-yandex-map#readme",
+  "keywords": [
+    "yandex-maps",
+    "maps",
+    "vue"
+  ],
+  "license": "MIT",
+  "main": "dist/vue-yandex-maps.js",
+  "maintainers": [
+    {
+      "name": "pnkbizz",
+      "email": "bizz.gc@gmail.com"
+    }
+  ],
+  "name": "vue-yandex-maps",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PNKBizz/vue-yandex-map.git"
+  },
+  "scripts": {
+    "build": "rollup -c",
+    "docs:build": "vuepress build docs",
+    "docs:dev": "vuepress dev docs",
+    "prepublish": "npm run build"
+  },
+  "unpkg": "dist/vue-yandex-maps.umd.js",
+  "version": "0.8.17"
+}

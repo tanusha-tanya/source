@@ -8,6 +8,7 @@ import Story from '@/components/Story'
 import Contact from '@/components/Contact'
 import Project from '@/components/Project'
 import Empty from '@/components/Empty'
+import Udmadd from '@/components/Udmadd'
 
 Vue.use(Router)
 
@@ -35,23 +36,28 @@ export default new Router({
     },
     {
       path: '/story',
-      name: 'Story',
+      name: 'story',
       component: Story
     },
     {
       path: '/contact',
-      name: 'Contact',
+      name: 'contact',
       component: Contact
     },
     {
       path: '/empty',
-      name: 'Empty',
+      name: 'empty',
       component: Empty
     },
     {
       path: '/project',
-      name: 'Project',
+      name: 'project',
       component: Project
+    },
+    {
+      path: '/udmadd',
+      name: 'udmadd',
+      component: Udmadd
     }       
   ],
   mode: 'history'

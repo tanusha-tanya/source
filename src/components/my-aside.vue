@@ -3,7 +3,7 @@
       <div class="aside-decor" style="background-image: url('../assets/svg/footer_bg.svg')"></div>
       <div class="container">
         <div class="aside-title">{{langText}}</div>
-        <a href="/addstory" class="aside-button">{{addStory}}</a>
+        <a  :href="!udmDetected?'/addstory': '/udmadd'" class="aside-button">{{addStory}}</a>
       </div>
     </aside>
 </template>
@@ -27,6 +27,15 @@ export default{
       else{
          return 'Ватса аслэсьтыд историдэ'
       }     
+    },        
+    udmDetected:function(){ 
+      let path = this.$router.currentRoute.name;     
+      if(path == "udm" || path == "udmadd"){        
+        return true
+      }
+      else{
+         return false
+      }   
     },
   }
 } 
@@ -154,10 +163,16 @@ export default{
   position: absolute;
   bottom: 12px;
   left: calc(50% - 28px);
+  transition: width .3s, left .3s;
 }
 @media(min-width: 768px){
   .aside-button:before{
     bottom: 20px; 
   }
 }
+.aside-button:hover:before{
+  width: 213px;
+  left: 26px;
+}
+
 </style>

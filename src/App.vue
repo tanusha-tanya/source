@@ -12,13 +12,13 @@
       <div class="container"> 
         <div class="header-flex"> 
           <div class="lang" v-if="!addform">
-            <a class="lang-link lang-link__active" href="/story" >Рус</a>
-            <a class="lang-link"  href="/udm">Удм</a>
+            <a :class="!udmDetected?classLinkActive:classLink"  href="/story" >Рус</a>
+            <a :class="udmDetected?classLinkActive:classLink" href="/udm">Удм</a>
           </div>
           <a href="/">
             <img src="assets/svg/logotype.svg" alt="Vue Logo" class="logotype" height="48"> 
           </a>
-          <a href="/addstory" class="addbutton" v-if="!addform">
+          <a :href="!udmDetected?'/addstory': '/udmadd'" class="addbutton" v-if="!addform">
             <span>{{addStory}}</span>
           </a>     
         </div>
@@ -99,11 +99,22 @@ export default {
   data(){
     return{
       isAlert: true,
-      coocies: true,      
+      coocies: true,
+      classLink:"lang-link",
+      classLinkActive:["lang-link", "lang-link__active"]        
     }
-  },  
-  computed:{
-    addStory: function(){
+  },
+  computed:{    
+    udmDetected:function(){ 
+      let path = this.$router.currentRoute.name;     
+      if(path == "udm" || path == "udmadd"){        
+        return true
+      }
+      else{
+         return false
+      }   
+    },
+    addStory: function(){      
       if(this.$router.currentRoute.name != "udm"){
         return 'добавить историю'
       }
@@ -112,13 +123,14 @@ export default {
       }     
     },
     addform: function(){
-      if(this.$router.currentRoute.name != "addstory"){
+      let path = this.$router.currentRoute.name
+      if(path != "addstory" && path != "udmadd"){
         return false
       }
       else{
          return true
       }     
-    }
+    }   
   }
 }
 
@@ -255,20 +267,22 @@ body{
   top: 39px;
   transition: background .3s;
 }
-.lang-link__active{
+
+
+.lang-link__active, .lang-link:hover, .lang-link:active{
   color: #FF4646;
 }
-.lang-link__active:after{
+.lang-link__active:after, .lang-link:hover:after, .lang-link:active:after{
   background:  #FF4646;
 }
 
 @media(min-width: 768px){
-  .lang-link__active:after{
+  .lang-link__active:after, .lang-link:hover:after, .lang-link:active:after{
     top: 43px;  
   }
 }
 @media(min-width: 1024px){
-  .lang-link__active:after{
+  .lang-link__active:after, .lang-link:hover:after, .lang-link:active:after{
     top: 62px; 
   }
 }
@@ -291,7 +305,11 @@ body{
   height: 32px;
   position: absolute;
   right: 0;
+  background: #fff;
+  transition: background .3s;
 }
+
+
 @media(min-width: 768px){
   .addbutton{
     width: 200px;
@@ -301,6 +319,7 @@ body{
     align-items: center;
     text-decoration: none;
   }
+ 
 }
 
 @media(min-width: 1440px){
@@ -308,13 +327,20 @@ body{
     width: 266px;
     height: 48px;
   }
+   .addbutton:hover, .addbutton:focus{
+   background: #FF4646;
 }
+}
+
+
 .addbutton:before, .addbutton:after{
   content: '';
   display: block;
   position: absolute;
   background: #FF4646;
 }
+
+
 .addbutton:before{
   content: '';
   width: 2px;
@@ -351,7 +377,13 @@ body{
     color: #FF4646;
     font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
     font-weight: 600;
+    transition: color .3s;
   }
+}
+@media(min-width: 1440px){
+.addbutton:hover span, .addbutton:focus span{
+    color: #FFFFFF;
+}
 }
 .footer{
   background: #161616;
@@ -545,6 +577,13 @@ body{
   box-sizing: border-box;
   border: 1px solid #161616;
 }
+@media(min-width: 1024px){
+  .footer-alert{
+    width:50%;
+    position: relative;
+    left: 50%;
+  }
+}
 
 .footer-alert p{
   font-family: 'PT_Root_UI', Arial, Helvetica, sans-serif;
@@ -570,6 +609,12 @@ body{
   text-decoration: none;
   margin: 10px auto;
   position: relative;
+  background: #fff;
+  transition: background .3s, color .3s;
 }
 
+.footer-alert-close:hover{
+  background: #FF4646;
+  color: #fff;
+}
 </style>
