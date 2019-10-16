@@ -2,8 +2,12 @@
     <aside class="aside">
       <div class="aside-decor" style="background-image: url('../assets/svg/footer_bg.svg')"></div>
       <div class="container">
-        <div class="aside-title">{{langText}}</div>
-        <a  :href="!udmDetected?'/addstory': '/udmadd'" class="aside-button">{{addStory}}</a>
+        <div class="aside-title">
+          {{udmDetected?'Ватса ужрад яке адями сярысь аслэсьтыд историдэ!':'Добавьте свою историю о  событии или человеке!'}}
+        </div>
+        <a  :href="!udmDetected?'/addstory': '/udmadd'" class="aside-button">
+          {{udmDetected?'Ватса аслэсьтыд историдэ':'Добавить свою историю'}}
+        </a>
       </div>
     </aside>
 </template>
@@ -11,32 +15,19 @@
 <script>
 export default{
   name: 'app',
-  computed:{
-    langText: function(){
-      if(this.$router.currentRoute.name != "udm"){
-        return 'Добавьте свою историю о  событии или человеке! '
-      }
-      else{
-         return 'Ватса ужрад яке адями сярысь аслэсьтыд историдэ!'
-      }     
-    },
-    addStory: function(){
-      if(this.$router.currentRoute.name != "udm"){
-        return 'Добавить свою историю'
-      }
-      else{
-         return 'Ватса аслэсьтыд историдэ'
-      }     
-    },        
+  computed:{            
     udmDetected:function(){ 
       let path = this.$router.currentRoute.name;     
-      if(path == "udm" || path == "udmadd"){        
+      if(path == "udm" ||
+        path == "udmadd" || 
+        path == "contactudm" ||
+        path == "projectudm"){        
         return true
       }
       else{
          return false
       }   
-    },
+    }
   }
 } 
 </script>

@@ -3,7 +3,7 @@
      <div class="alert" v-if="isAlert">       
         <div class="container">
           <div class="alert-wrap">
-            В данный момент Вы находитесь на beta-версии сайта “Родники Удмуртии”
+            В данный момент Вы находитесь на beta-версии сайта {{udmDetected?'Удмуртиысь ошмесъёс':'Родники Удмуртии'}}
             <div class="close" @click.prevent="turneOf"><img src="assets/svg/cross.svg" alt="Vue Logo" height="9" width="9"> </div>
           </div>
         </div>
@@ -12,14 +12,14 @@
       <div class="container"> 
         <div class="header-flex"> 
           <div class="lang" v-if="!addform">
-            <a :class="!udmDetected?classLinkActive:classLink"  href="/story" >Рус</a>
-            <a :class="udmDetected?classLinkActive:classLink" href="/udm">Удм</a>
+            <a :class="!udmDetected?classLinkActive:classLink"  :href="rusLink" >Рус</a>
+            <a :class="udmDetected?classLinkActive:classLink" :href="udmLink">Удм</a>
           </div>          
           <a href="/">
             <img src="assets/svg/logotype.svg" alt="Vue Logo" class="logotype" height="48"> 
           </a>
           <a :href="!udmDetected?'/addstory': '/udmadd'" class="addbutton" v-if="!addform">
-            <span>{{addStory}}</span>
+            <span>{{udmDetected?'историез ватсаны':'добавить историю'}}</span>
           </a>     
         </div>
       </div>
@@ -29,7 +29,7 @@
        <div class="container">
           <div class="footer-flex">
             <div class="footer-col">
-              <p>Родники Удмуртии, 2019</p>
+              <p>{{udmDetected?'Удмуртиысь ошмесъёс':'Родники Удмуртии'}}, 2019</p>
               <p>Все права защищены законодательством РФ. При использовании любых материалов
               сайта ссылка обязательна, в Интернете обязательна гиперссылка на ресурс.
                 Иное является незаконным использованием и подлежит правовым последствиям. </p>
@@ -38,16 +38,20 @@
             </div>            
             <div class="footer-menu">
               <div class="menu-block">
-                <div class="footer-menu-title">Родники удмуртии</div>
+                <div class="footer-menu-title">{{udmDetected?'Удмуртиысь ошмесъёс':'Родники Удмуртии'}}</div>
                 <ul>
                   <li class="footer-menu-list">
                     <a href="/story" class="footer-menu-link">История</a>
                   </li>   
                   <li class="footer-menu-list">  
-                    <a href="/project" class="footer-menu-link">О проекте</a>
+                    <a :href="udmDetected?'/projectudm':'/project'" class="footer-menu-link">О проекте</a>
                   </li> 
                   <li class="footer-menu-list">   
-                    <a href="/contact" class="footer-menu-link">контакты</a>
+                    <a
+                     :href="udmDetected?'/contactudm':'/contact'"                  
+                    class="footer-menu-link">
+                     {{udmDetected?'Контактъёс':'Контакты'}}
+                  </a>
                   </li> 
                   <li class="footer-menu-list">   
                     <a href="/agreement" class="footer-menu-link">соглашение</a>
@@ -72,7 +76,7 @@
           </div>
           <div class="footer-flex footer-flex__center">
             <div class="copyright">
-              © Родники Удмуртии, 2019
+              {{udmDetected?'Удмуртиысь ошмесъёс':'Родники Удмуртии'}}, 2019
             </div>          
             <a href="http://picom.ru/" target="_blank" class="picom">Разработка — Picom</a>          
             <img src="assets/svg/heart.svg" alt="Vue Logo" height="16" width="16"  class="heart">  
@@ -100,29 +104,64 @@ export default {
     }
   },
   computed:{
+    udmLink(){
+      let path = this.$router.currentRoute.name; 
+      switch(path) {
+        case "/":  
+          return "/udm";
+          break;
+        case 'addstory':  
+          return "/udmadd";
+          break;       
+        case 'contact':  
+          return "/contactudm";
+          break;
+        case 'project':  
+          return "/projectudm";
+          break;
+        default:
+          return path;
+          break;
+      }     
+    },
+    rusLink(){
+      let path = this.$router.currentRoute.name;  
+       switch(path) {
+      case "udm":  
+        return "/story";
+        break;
+      case 'udmadd':  
+        return "/addstory";
+         break;     
+      case 'contactudm':  
+        return "/contact";
+        break;
+       case 'projectudm':  
+        return "/project";
+        break;
+      default:
+        return path;
+        break;
+      }   
+    },
     isAlert(){    
       return this.$store.state.isAlert
     },
     coocies(){      
       return this.$store.state.coocies
-    },    
-    udmDetected:function(){ 
+    },   
+    udmDetected(){      
       let path = this.$router.currentRoute.name;     
-      if(path == "udm" || path == "udmadd"){        
+      if(path == "udm" ||
+        path == "udmadd" || 
+        path == "contactudm" ||
+        path == "projectudm"){        
         return true
       }
       else{
          return false
-      }   
-    },
-    addStory: function(){      
-      if(this.$router.currentRoute.name != "udm"){
-        return 'добавить историю'
-      }
-      else{
-         return 'историез ватсаны'
-      }     
-    },
+      }      
+    },   
     addform: function(){
       let path = this.$router.currentRoute.name
       if(path != "addstory" && path != "udmadd"){

@@ -9,7 +9,8 @@
                <img src="assets/svg/arrow.svg" width="15" height="12">
                <span>на главную</span>
             </a>
-            <h1 class="form-title" v-if="firstform||secondform">Добавление истории</h1>    
+            <h1 class="form-title" v-if="firstform||secondform">
+               {{udmDetected?'Историез ватсан':'Добавление истории'}}</h1>    
             <div class="form-red"  v-if="firstform||secondform">
                <span>культурного портала родники удмуртии
                </span>
@@ -31,7 +32,11 @@
                         <input type="text" placeholder="e-mail*" class="form-input" name="autoremail" v-model="autor.email">
                         <div class="form-description">Укажите e-mail для связи с редакцией</div>
                         <div class="form-flex" v-for="autorlink in autorlinks" :key="autorlink">                             
-                           <input type="text" placeholder="ссылка на соц. сеть" class="input-short form-input" :name="'autorlink'+autorlink"  v-model="autor.link">
+                           <input type="text"
+                             placeholder="ссылка на соц. сеть"
+                             class="input-short form-input" 
+                             :name="'autorlink'+autorlink" 
+                           >
                            <button type="button" class="form-addbutton" @click.prevent="pushLinks()"></button>
                         </div>                        
                         <div class="checkbox-block">
@@ -78,20 +83,35 @@
                   </div>               
                <div v-if="secondform">
                      <div class="form-block">
-                        <h2 class="form-h2">Расскажите историю</h2>
-                        <input type="text" placeholder="Заголовок*" class="form-input"   name="storytitle" v-model="story.title">
-                        <textarea placeholder="Текст истории*" class="form-textarea" name="storytext" v-model="story.text"></textarea>                        
+                        <h2 class="form-h2">{{udmDetected?'Вералэ историдэс':'Расскажите историю'}}</h2>
+                        <input type="text"
+                           :placeholder="udmDetected?'Йыръян*':'Заголовок*'" 
+                           class="form-input"                      
+                           name="storytitle" 
+                       v-model="story.title">
+                        <textarea 
+                           :placeholder="udmDetected?'Верандылэн текстэз*':'Текст истории*'"  
+                           class="form-textarea"
+                           name="storytext"
+                          v-model="story.text">
+                        </textarea>                        
                      </div>
                      <div class="form-block">
-                        <h2 class="form-h2">Добавьте хронологию</h2>
+                        <h2 class="form-h2">{{udmDetected?'Хронологизэ ватсалэ':'Добавьте хронологию'}}</h2>
                         <div class="form-flex" v-for="storyDate in storyDates" :key="storyDate">
-                           <textarea placeholder="Дата и описание" :name="'storydate'+storyDate" class="form-textarea textarea-short" v-model="story.date"></textarea> 
+                           <textarea
+                              :placeholder="udmDetected?'Дата и описание':'Нуналзэ пусъе но вакчияк со сярысь гожтэ'" 
+                              :name="'storydate'+storyDate"
+                              class="form-textarea textarea-short"
+                           >
+                           </textarea> 
                            <button type="button" class="form-addbutton form-addbutton__long" @click.prevent="pushdate()"></button>    
                         </div>
-                        <div class="form-description">Укажите хронологию событий. Например, 1980 - Проходили Летние Олимпийские Игры в Москве. Для того чтобы добавить новую дату и описание нажмите кнопку “Плюс”.</div>                   
+                        <div class="form-description" v-if="!udmDetected">Укажите хронологию событий. Например, 1980 - Проходили Летние Олимпийские Игры в Москве. Для того чтобы добавить новую дату и описание нажмите кнопку “Плюс”.</div>                   
+                        <div class="form-description">Ужрадъёслэсь радызъя ортчемзэс гожтэ. Кылсярысь, 1980-тӥ ар – Москваын Гужем Олимпи Шудонъёс ортчизы. Выль нуналэз но со сярысь вакчияк веранэз ватсан понна «+» кнопка вылэ зӥбе.</div>
                      </div>
                      <div class="form-block">
-                        <h2 class="form-h2">Прикрепите файлы</h2>
+                        <h2 class="form-h2">{{udmDetected?' Файлъёс ватсалэ':'Прикрепите файлы'}}</h2>
                         <div class="file-flex">
                            <div class="file-block">
                               <input type="file" class="file-input" id="doc" name="doc">
@@ -115,27 +135,45 @@
                               </label>                              
                            </div>
                         </div>
-                        <div class="form-description">Прикрепите текстовые файлы в формате .doc, фотоматериалы в формате .jpg или .png, аудиоматериалы в формате .mp3, а также ссылки на видео. Максимальный размер текстового файла 20 мб; изображения - 20 мб; аудиофайла - 20 мб. Максимальное количество файлов 10 шт.</div>                   
+                        <div class="form-description" v-if="udmDetected">Прикрепите текстовые файлы в формате .doc, фотоматериалы в формате .jpg или .png, аудиоматериалы в формате .mp3, а также ссылки на видео. Максимальный размер текстового файла 20 мб; изображения - 20 мб; аудиофайла - 20 мб. Максимальное количество файлов 10 шт.</div>                   
+                        <div class="form-description" v-else>Текстэн файлъёстэс .doc форматэн юнматэ, туспуктэмъёстэс - .jpg яке .png форматэн, аудиоматериалъёстэс - .mp3 форматэн, озьы ик видео вылэ чӧлскон пуктэ. Текстэн файллэн быдӟалаез 20 мб луыны быгатэ, туспуктэмъёслэн – 20 мб, аудиоматериалъёслэн – 20 мб. Тужгес троссэ 10 файл ватсаны луэ.</div>
                      </div>   
                      <div class="form-block">
-                           <div class="or">Или</div>
+                           <div class="or">{{udmDetected?'яке':'Или'}}</div>
                      </div>
                      <div class="form-block">
-                        <h2 class="form-h2">Укажите ссылки</h2>
+                        <h2 class="form-h2">{{udmDetected?'Чӧлсконъёс пуктэ':'Укажите ссылки'}}</h2>
                         <div class="form-flex" v-for="linkdoc in linkdocs" :key="linkdoc">
-                           <input type="text" placeholder="ссылка на документ" :name="'linkdoc'+linkdoc" class="input-short form-input" v-model="story.link.doc">
+                           <input type="text"
+                              :placeholder="udmDetected?'Ужкагаз вылэ чӧлскон':'Ссылка на документ'" 
+                              :name="'linkdoc'+linkdoc" 
+                              class="input-short form-input"
+                           >
                            <button type="button" class="form-addbutton" @click.prevent="pushdoc()"></button>
                         </div>
                         <div class="form-flex" v-for="linkpick in linkpicks" :key="linkpick">
-                           <input type="text" placeholder="ссылка на фото" :name="'linkpick'+linkpick" class="input-short form-input"  v-model="story.link.pick">
+                           <input type="text"
+                              :placeholder="udmDetected?'Туспуктэм вылэ чӧлскон':'ссылка на фото'" 
+                              :name="'linkpick'+linkpick"
+                              class="input-short form-input" 
+                           >
                            <button type="button" class="form-addbutton" @click.prevent="pushpick()"></button>
                         </div>
                         <div class="form-flex" v-for="linkaudio in linkaudios" :key="linkaudio">
-                           <input type="text" placeholder="ссылка на аудио" :name="'linkaudio'+linkaudio" class="input-short form-input" v-model="story.link.audio">
+                           <input type="text" 
+                              :placeholder="udmDetected?'Аудио вылэ чӧлскон':'Ссылка на аудио'" 
+                              :name="'linkaudio'+linkaudio" 
+                              class="input-short form-input" 
+                           >
                            <button type="button" class="form-addbutton" @click.prevent="pushaudio()"></button>
                         </div>
                         <div class="form-flex" v-for="linkvideo in linkvideos" :key="linkvideo">
-                           <input type="text" placeholder="ссылка на видео" :name="'linkvideo'+linkvideo" class="input-short form-input" v-model="story.link.video">
+                           <input
+                              type="text"
+                              placeholder="ссылка на видео"
+                              :name="'linkvideo'+linkvideo"
+                              class="input-short form-input" 
+                           >
                            <button type="button" class="form-addbutton" @click.prevent="pushvideo()"></button>
                         </div> 
                         <div class="form-description">Укажите ссылку на видео, которое расположено на youtube.com или vimeo.com. Для добавления нескольких ссылок нажмите на кнопку “Плюс”.</div>                                       
@@ -166,6 +204,17 @@
 <script>
 
 export default {
+   computed:{
+       udmDetected:function(){ 
+      let path = this.$router.currentRoute.name;     
+      if(path == "udmadd"){      
+        return true
+      }
+      else{
+         return false
+      }   
+    }  
+  },  
    data(){
     return{  
       autorlinks: [1], 

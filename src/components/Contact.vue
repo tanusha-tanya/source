@@ -3,12 +3,15 @@
         <main>
             <div class="container">
                 <div class="history">
-                    <h1>Контакты</h1>
+                    <h1>{{udmDetected?'Контактъёс':'Контакты'}}</h1>
                     <div class="home-description">
                         <span>мы на связи</span>
                     </div>
-                    <div class="project-text">
+                    <div class="project-text" v-if="!udmDetected">                        
                         <p>Вопросы по работе проекта вы можете задать его оператору – Информационному агентству «Удмуртия». Сообщайте о возможных ошибках, предлагайте свои идеи и улучшения – вместе мы сделаем «Родники Удмуртии» интереснее!</p>
+                    </div>
+                    <div class="project-text" v-else>
+                        <p>Ӵектослэн ужамез сярысь юанъёстэс операторезлы сётыны быгатӥськоды – ивортодэтъя «Удмуртия» агентстволы. Ивортэ милемыз кылем янгышъёсмы сярысь, малпанъёстэс но ӵектосмес умоятыны ӵектонъёстэс вералэ – ӵошен асьмеос «Удмуртиысь ошмесъёсты» тунсыкогес каром!</p>
                     </div>
                     <div class="contacts">
                         <div class="contacts-item">
@@ -97,7 +100,18 @@ export default {
     onClick(e) {
       this.coords = e.get('coords');
     }
-  }  
+  },
+  computed:{
+       udmDetected:function(){ 
+      let path = this.$router.currentRoute.name;     
+      if(path == "contactudm"){      
+        return true
+      }
+      else{
+         return false
+      }   
+    }  
+  }   
 }
 </script>
 

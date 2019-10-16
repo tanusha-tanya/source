@@ -3,19 +3,27 @@ import Router from 'vue-router'
 import Home from '@/components/Home'
 import Addstory from '@/components/Addstory'
 import Agreement from '@/components/Agreement'
-import Udm from '@/components/Udm'
 import Story from '@/components/Story'
 import Contact from '@/components/Contact'
 import Project from '@/components/Project'
 import Empty from '@/components/Empty'
-import Udmadd from '@/components/Udmadd'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
+      path: '/udm',
+      name: 'udm',
+      component: Story
+    },
+    {
       path: '/',
+      name: 'main',
+      component: Story
+    },
+    {
+      path: '/story',
       name: 'story',
       component: Story
     },
@@ -25,24 +33,24 @@ export default new Router({
       component: Addstory
     },
     {
+      path: '/udmadd',
+      name: 'udmadd',
+      component: Addstory
+    },
+    {
       path: '/agreement',
       name: 'agreement',
       component: Agreement
-    },
-    {
-      path: '/udm',
-      name: 'udm',
-      component: Udm
-    },
-    {
-      path: '/story',
-      name: 'story',
-      component: Story
-    },
+    },   
     {
       path: '/contact',
       name: 'contact',
       component: Contact
+    },
+    {
+      path: '/contactudm',
+      name: 'contactudm',
+      component:  Contact
     },
     {
       path: '/empty',
@@ -55,10 +63,11 @@ export default new Router({
       component: Project
     },
     {
-      path: '/udmadd',
-      name: 'udmadd',
-      component: Udmadd
-    }       
+      path: '/projectudm',
+      name: 'projectudm',
+      component: Project
+    },
+          
   ],
   mode: 'history'
 })
