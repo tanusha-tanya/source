@@ -1,12 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import details from './details'
 
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  modules:{
-    details   
+  state: {
+    isAlert: true,
+    coocies: true,
+  },  
+  mutations: {
+    turneOf(state) {    
+      state.isAlert = false;
+    },
+    close(state) {
+      state.coocies = false;
+    }
   }
 })

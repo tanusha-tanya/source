@@ -19,30 +19,30 @@
                <div v-if="firstform">                  
                      <div class="form-block">
                         <h2 class="form-h2">Расскажите об авторе</h2>
-                        <input type="text" placeholder="Имя*" class="form-input" v-model="autor.name">
-                        <input type="text" placeholder="Фамилия*" class="form-input" v-model="autor.lastname">
-                        <input type="text" placeholder="Город или район*" class="form-input"  v-model="autor.city">
-                        <textarea placeholder="информация об авторе" class="form-textarea" v-model="autor.information"></textarea>
+                        <input type="text" placeholder="Имя*" class="form-input" name="autorname" v-model="autor.name">
+                        <input type="text" placeholder="Фамилия*" class="form-input" name="autorlastname"  v-model="autor.lastname">
+                        <input type="text" placeholder="Город или район*" class="form-input" name="autorcity" v-model="autor.city">
+                        <textarea placeholder="информация об авторе" class="form-textarea" name="autorinformation" v-model="autor.information"></textarea>
                      </div>                  
                      <div class="form-block">
                         <h2 class="form-h2">Укажите контактную информацию</h2>
-                        <input type="text" placeholder="номер телефона*" class="form-input" v-model="autor.phone">
+                        <input type="text" placeholder="номер телефона*" class="form-input" name="autorphone" v-model="autor.phone">
                         <div class="form-description">Укажите номер телефона для связи с редакцией</div>
-                        <input type="text" placeholder="e-mail*" class="form-input" v-model="autor.email">
+                        <input type="text" placeholder="e-mail*" class="form-input" name="autoremail" v-model="autor.email">
                         <div class="form-description">Укажите e-mail для связи с редакцией</div>
-                        <div class="form-flex">
-                           <input type="text" placeholder="ссылка на соц. сеть" class="input-short form-input"  v-model="autor.link">
-                           <button type="button" class="form-addbutton" @click.prevent=""></button>
-                        </div>
+                        <div class="form-flex" v-for="autorlink in autorlinks" :key="autorlink">                             
+                           <input type="text" placeholder="ссылка на соц. сеть" class="input-short form-input" :name="'autorlink'+autorlink"  v-model="autor.link">
+                           <button type="button" class="form-addbutton" @click.prevent="pushLinks()"></button>
+                        </div>                        
                         <div class="checkbox-block">
-                           <input type="checkbox" id="agree-soc" class="input-checkbox" v-model="agreesoc">
+                           <input type="checkbox" id="agree-soc" class="input-checkbox" v-model="agreesoc" name="agreesoc">
                            <label for="agree-soc" class="checkbox-label"> Разместить ссылку на персональную страницу в соц. сети на сайте</label>
                         </div>
                      </div>
                      <div class="form-block">
                         <h2 class="form-h2">Прикрепите фото автора</h2>
                         <div class="file-block">
-                           <input type="file" class="file-input" id="picture" @change="previewFiles($event)" >
+                           <input type="file" class="file-input" id="autorpicture" @change="previewFiles($event)" name="autorpicture">
                            <label class="file-label" for="picture">
                               <img class="form-image" src="assets/svg/photo.svg" width="42" height="34">
                               <span>Фото</span>
@@ -54,61 +54,61 @@
                      <div class="form-attention">
                         <div class="attention-title">Важно!</div>
                         <div class="attention-text">После отправки истории и ее последующей модерации 
-                        Вы можете дополнить или изменить историю. Для этого заново добавьте свою историю,
-                        выберите статус истории - Редактирование истории. Далее укажите название истории,
-                        которую хотите отредактировать, заполните поля и отправьте отредактированную
+                           Вы можете дополнить или изменить историю. Для этого заново добавьте свою историю,
+                           выберите статус истории - Редактирование истории. Далее укажите название истории,
+                           которую хотите отредактировать, заполните поля и отправьте отредактированную
                            историю на модерацию.
                         </div>
                      </div>
                      <div class="form-block">
                         <div class="checkbox-block">
-                           <input type="checkbox" id="agree-agree" class="input-checkbox" v-model="agreeagree">
+                           <input type="checkbox" id="agree-agree" class="input-checkbox" name="agreeagree" v-model="agreeagree">
                            <label for="agree-agree" class="checkbox-label"> Я согласен с обработкой персональных данных согласно условиям <a href="/agreement" targe="_blank">Пользовательского соглашения</a></label>
                         </div>
                         <div class="checkbox-block">
-                           <input type="checkbox" id="agree-info" class="input-checkbox" v-model="agreeinfo">
+                           <input type="checkbox" id="agree-info" class="input-checkbox" name="agreeinfo" v-model="agreeinfo">
                            <label for="agree-info" class="checkbox-label"> Я согласен с публикацей истории и сопутствующих к ней материалов и дополнительной информации</label>
                         </div>
                      </div>
                      <div class="form-flex-big">                     
                         <div class="form-block">
-                           <button type="button" class="form-submit" @click.prevent="nextform()" accept=".png, .jpg, .jpeg">Продолжить</button>
+                           <button type="button" class="form-submit" @click.prevent="nextform()">Продолжить</button>
                         </div>
                      </div>
                   </div>               
                <div v-if="secondform">
                      <div class="form-block">
                         <h2 class="form-h2">Расскажите историю</h2>
-                        <input type="text" placeholder="Заголовок*" class="form-input"  v-model="story.title">
-                        <textarea placeholder="Текст истории*" class="form-textarea" v-model="story.text"></textarea>                        
+                        <input type="text" placeholder="Заголовок*" class="form-input"   name="storytitle" v-model="story.title">
+                        <textarea placeholder="Текст истории*" class="form-textarea" name="storytext" v-model="story.text"></textarea>                        
                      </div>
                      <div class="form-block">
                         <h2 class="form-h2">Добавьте хронологию</h2>
-                        <div class="form-flex">
-                           <textarea placeholder="Дата и описание" class="form-textarea textarea-short" v-model="story.date"></textarea> 
-                           <button type="button" class="form-addbutton form-addbutton__long" @click.prevent=""></button>    
-                        </div>   
+                        <div class="form-flex" v-for="storyDate in storyDates" :key="storyDate">
+                           <textarea placeholder="Дата и описание" :name="'storydate'+storyDate" class="form-textarea textarea-short" v-model="story.date"></textarea> 
+                           <button type="button" class="form-addbutton form-addbutton__long" @click.prevent="pushdate()"></button>    
+                        </div>
                         <div class="form-description">Укажите хронологию событий. Например, 1980 - Проходили Летние Олимпийские Игры в Москве. Для того чтобы добавить новую дату и описание нажмите кнопку “Плюс”.</div>                   
                      </div>
                      <div class="form-block">
                         <h2 class="form-h2">Прикрепите файлы</h2>
                         <div class="file-flex">
                            <div class="file-block">
-                              <input type="file" class="file-input" id="doc">
+                              <input type="file" class="file-input" id="doc" name="doc">
                               <label class="file-label" for="doc">
                                  <img class="form-image" src="assets/svg/doc.svg" width="42" height="34">
                                  <span>документ</span>
                               </label>                              
                            </div>
                            <div class="file-block">
-                              <input type="file" class="file-input" id="pic">
+                              <input type="file" class="file-input" id="pic" name="pic">
                               <label class="file-label" for="pic">
                                  <img class="form-image" src="assets/svg/photo.svg" width="42" height="34">
                                  <span>Фото</span>
                               </label>                              
                            </div>
                            <div class="file-block">
-                              <input type="file" class="file-input" id="audio">
+                              <input type="file" class="file-input" id="audio" name="audio">
                               <label class="file-label" for="audio">
                                  <img class="form-image" src="assets/svg/audio.svg" width="42" height="34">
                                  <span>аудио</span>
@@ -122,23 +122,23 @@
                      </div>
                      <div class="form-block">
                         <h2 class="form-h2">Укажите ссылки</h2>
-                        <div class="form-flex">
-                        <input type="text" placeholder="ссылка на документ" class="input-short form-input" v-model="story.link.doc">
-                        <button type="button" class="form-addbutton" @click.prevent=""></button>
-                     </div>
-                     <div class="form-flex">
-                        <input type="text" placeholder="ссылка на фото" class="input-short form-input"  v-model="story.link.pick">
-                        <button type="button" class="form-addbutton" @click.prevent=""></button>
-                     </div>
-                     <div class="form-flex">
-                        <input type="text" placeholder="ссылка на аудио" class="input-short form-input" v-model="story.link.audio">
-                        <button type="button" class="form-addbutton" @click.prevent=""></button>
-                     </div>
-                     <div class="form-flex">
-                        <input type="text" placeholder="ссылка на видео" class="input-short form-input" v-model="story.link.video">
-                        <button type="button" class="form-addbutton" @click.prevent=""></button>
-                     </div> 
-                     <div class="form-description">Укажите ссылку на видео, которое расположено на youtube.com или vimeo.com. Для добавления нескольких ссылок нажмите на кнопку “Плюс”.</div>                                       
+                        <div class="form-flex" v-for="linkdoc in linkdocs" :key="linkdoc">
+                           <input type="text" placeholder="ссылка на документ" :name="'linkdoc'+linkdoc" class="input-short form-input" v-model="story.link.doc">
+                           <button type="button" class="form-addbutton" @click.prevent="pushdoc()"></button>
+                        </div>
+                        <div class="form-flex" v-for="linkpick in linkpicks" :key="linkpick">
+                           <input type="text" placeholder="ссылка на фото" :name="'linkpick'+linkpick" class="input-short form-input"  v-model="story.link.pick">
+                           <button type="button" class="form-addbutton" @click.prevent="pushpick()"></button>
+                        </div>
+                        <div class="form-flex" v-for="linkaudio in linkaudios" :key="linkaudio">
+                           <input type="text" placeholder="ссылка на аудио" :name="'linkaudio'+linkaudio" class="input-short form-input" v-model="story.link.audio">
+                           <button type="button" class="form-addbutton" @click.prevent="pushaudio()"></button>
+                        </div>
+                        <div class="form-flex" v-for="linkvideo in linkvideos" :key="linkvideo">
+                           <input type="text" placeholder="ссылка на видео" :name="'linkvideo'+linkvideo" class="input-short form-input" v-model="story.link.video">
+                           <button type="button" class="form-addbutton" @click.prevent="pushvideo()"></button>
+                        </div> 
+                        <div class="form-description">Укажите ссылку на видео, которое расположено на youtube.com или vimeo.com. Для добавления нескольких ссылок нажмите на кнопку “Плюс”.</div>                                       
                      </div>
                      <div class="form-flex-big">
                      <div class="form-block">
@@ -167,7 +167,13 @@
 
 export default {
    data(){
-    return{     
+    return{  
+      autorlinks: [1], 
+      storyDates: [1],
+      linkdocs: [1], 
+      linkpicks: [1],  
+      linkaudios: [1],
+      linkvideos: [1],  
       firstform: true,
       secondform: false,
       success: false,      
@@ -200,7 +206,37 @@ export default {
       },         
     }    
   }, 
-   methods:{   
+   methods:{ 
+      pushLinks(){
+         let lastId = this.autorlinks.length;
+         let enough = 5;
+         if(lastId < enough){
+            this.autorlinks.push(lastId+1)
+         } 
+         else{
+            alert(`Вы не можете добавить более ${enough} ссылок`)
+         }        
+      },  
+      pushdate(){
+         let lastId = this.storyDates.length;        
+         this.storyDates.push(lastId+1)          
+      }, 
+      pushdoc(){
+         let lastId = this.linkdocs.length;        
+         this.linkdocs.push(lastId+1)          
+      }, 
+      pushpick(){
+         let lastId = this.linkpicks.length;        
+         this.linkpicks.push(lastId+1)          
+      },
+      pushaudio(){
+         let lastId = this.linkaudios.length;        
+         this.linkaudios.push(lastId+1)          
+      },  
+      pushvideo(){
+         let lastId = this.linkvideos.length;        
+         this.linkvideos.push(lastId+1)          
+      },    
       previewFiles(event) {
          console.log(event.target.value)
       },  

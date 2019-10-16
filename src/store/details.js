@@ -1,16 +1,14 @@
 export default{
   state: {
-        
+    isAlert: true,
+    coocies: true,
   },  
-  actions:{},
-  getters:{
-    cards (state){
-      return state.cards
+  mutations: {
+    turneOf(state) {    
+      state.isAlert =false;
     },
-    cardById (state){
-      return cardId => {
-        return state.cards.find(card => card.id === cardId)
-      }
-    },
+    close(state) {
+      state.coocies =false;
+    }
   }
 }

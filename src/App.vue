@@ -1,10 +1,10 @@
 <template>
   <div id="app">   
-     <div class="alert" v-if="isAlert">
+     <div class="alert" v-if="isAlert">       
         <div class="container">
           <div class="alert-wrap">
             В данный момент Вы находитесь на beta-версии сайта “Родники Удмуртии”
-            <div class="close" @click.prevent="isAlert=!isAlert"><img src="assets/svg/cross.svg" alt="Vue Logo" height="9" width="9"> </div>
+            <div class="close" @click.prevent="turneOf"><img src="assets/svg/cross.svg" alt="Vue Logo" height="9" width="9"> </div>
           </div>
         </div>
       </div>
@@ -14,7 +14,7 @@
           <div class="lang" v-if="!addform">
             <a :class="!udmDetected?classLinkActive:classLink"  href="/story" >Рус</a>
             <a :class="udmDetected?classLinkActive:classLink" href="/udm">Удм</a>
-          </div>
+          </div>          
           <a href="/">
             <img src="assets/svg/logotype.svg" alt="Vue Logo" class="logotype" height="48"> 
           </a>
@@ -80,7 +80,7 @@
           <div class="footer-alert" v-if="coocies">
             <p>Мы используем cookie-файлы для наилучшего представления нашего сайта. Продолжая использовать этот сайт, 
             Вы соглашаетесь с использованием cookie-файлов.</p>
-            <a href="#" class="footer-alert-close" @click.prevent="coocies=!coocies">OK</a>
+            <a href="#" class="footer-alert-close" @click.prevent="close">OK</a>
           </div>
       </div>
     </footer> 
@@ -89,19 +89,23 @@
 
 <script>
 
-export default {
+export default {  
   name: 'app',
   components: {    
   },
   data(){
-    return{
-      isAlert: true,
-      coocies: true,
+    return{      
       classLink:"lang-link",
       classLinkActive:["lang-link", "lang-link__active"]        
     }
   },
-  computed:{    
+  computed:{
+    isAlert(){    
+      return this.$store.state.isAlert
+    },
+    coocies(){      
+      return this.$store.state.coocies
+    },    
     udmDetected:function(){ 
       let path = this.$router.currentRoute.name;     
       if(path == "udm" || path == "udmadd"){        
@@ -128,6 +132,14 @@ export default {
          return true
       }     
     }   
+  },
+  methods:{
+    turneOf(){      
+      this.$store.commit('turneOf')
+    },
+    close(){
+      this.$store.commit('close')      
+    }    
   }
 }
 
