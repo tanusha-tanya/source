@@ -41,7 +41,7 @@
                 <div class="footer-menu-title">{{udmDetected?'Удмуртиысь ошмесъёс':'Родники Удмуртии'}}</div>
                 <ul>
                   <li class="footer-menu-list">
-                    <a href="/story" class="footer-menu-link">История</a>
+                    <a :href="udmDetected?'/udm':'/story'" class="footer-menu-link">История</a>
                   </li>   
                   <li class="footer-menu-list">  
                     <a :href="udmDetected?'/projectudm':'/project'" class="footer-menu-link">О проекте</a>
@@ -110,6 +110,12 @@ export default {
         case "/":  
           return "/udm";
           break;
+        case "story":  
+          return "/udm";
+          break;
+        case "main":  
+          return "/udm";
+          break;
         case 'addstory':  
           return "/udmadd";
           break;       
@@ -136,8 +142,11 @@ export default {
       case 'contactudm':  
         return "/contact";
         break;
-       case 'projectudm':  
+      case 'projectudm':  
         return "/project";
+        break;
+      case 'main':  
+        return "/";
         break;
       default:
         return path;

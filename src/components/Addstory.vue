@@ -47,12 +47,18 @@
                      <div class="form-block">
                         <h2 class="form-h2">Прикрепите фото автора</h2>
                         <div class="file-block">
-                           <input type="file" class="file-input" id="autorpicture" @change="previewFiles($event)" name="autorpicture">
-                           <label class="file-label" for="picture">
+                           <input type="file" class="file-input" id="autorpicture" @change="previewFiles($event)" name="autorpicture" accept="image/jpeg,image/png,image/gif">
+                           <label class="file-label" for="autorpicture" v-if="autorpick.length <= 0">
                               <img class="form-image" src="assets/svg/photo.svg" width="42" height="34">
                               <span>Фото</span>
                            </label>
-                           <div class="filename"></div>
+                           <div class="filename" v-else>
+                              <img class="prevew" src="assets/svg/photo.svg" width="24" height="24"> 
+                              {{autorpick}}
+                              <a href="#" class="delete" @click.prevent="deletePick()">
+                                 <img src="assets/svg/redcross.svg" width="9" height="9"> 
+                              </a>
+                           </div>
                         </div>
                         <div class="form-description">Прикрепляйте фотоматериалы в формате .jpg или .png. Максимальный размер изображения 20 мб.</div>
                      </div>
@@ -108,7 +114,7 @@
                            <button type="button" class="form-addbutton form-addbutton__long" @click.prevent="pushdate()"></button>    
                         </div>
                         <div class="form-description" v-if="!udmDetected">Укажите хронологию событий. Например, 1980 - Проходили Летние Олимпийские Игры в Москве. Для того чтобы добавить новую дату и описание нажмите кнопку “Плюс”.</div>                   
-                        <div class="form-description">Ужрадъёслэсь радызъя ортчемзэс гожтэ. Кылсярысь, 1980-тӥ ар – Москваын Гужем Олимпи Шудонъёс ортчизы. Выль нуналэз но со сярысь вакчияк веранэз ватсан понна «+» кнопка вылэ зӥбе.</div>
+                        <div class="form-description" v-else>Ужрадъёслэсь радызъя ортчемзэс гожтэ. Кылсярысь, 1980-тӥ ар – Москваын Гужем Олимпи Шудонъёс ортчизы. Выль нуналэз но со сярысь вакчияк веранэз ватсан понна «+» кнопка вылэ зӥбе.</div>
                      </div>
                      <div class="form-block">
                         <h2 class="form-h2">{{udmDetected?' Файлъёс ватсалэ':'Прикрепите файлы'}}</h2>
@@ -135,7 +141,7 @@
                               </label>                              
                            </div>
                         </div>
-                        <div class="form-description" v-if="udmDetected">Прикрепите текстовые файлы в формате .doc, фотоматериалы в формате .jpg или .png, аудиоматериалы в формате .mp3, а также ссылки на видео. Максимальный размер текстового файла 20 мб; изображения - 20 мб; аудиофайла - 20 мб. Максимальное количество файлов 10 шт.</div>                   
+                        <div class="form-description" v-if="!udmDetected">Прикрепите текстовые файлы в формате .doc, фотоматериалы в формате .jpg или .png, аудиоматериалы в формате .mp3, а также ссылки на видео. Максимальный размер текстового файла 20 мб; изображения - 20 мб; аудиофайла - 20 мб. Максимальное количество файлов 10 шт.</div>                   
                         <div class="form-description" v-else>Текстэн файлъёстэс .doc форматэн юнматэ, туспуктэмъёстэс - .jpg яке .png форматэн, аудиоматериалъёстэс - .mp3 форматэн, озьы ик видео вылэ чӧлскон пуктэ. Текстэн файллэн быдӟалаез 20 мб луыны быгатэ, туспуктэмъёслэн – 20 мб, аудиоматериалъёслэн – 20 мб. Тужгес троссэ 10 файл ватсаны луэ.</div>
                      </div>   
                      <div class="form-block">
@@ -216,7 +222,8 @@ export default {
     }  
   },  
    data(){
-    return{  
+    return{ 
+      autorpick: '', 
       autorlinks: [1], 
       storyDates: [1],
       linkdocs: [1], 
@@ -287,7 +294,12 @@ export default {
          this.linkvideos.push(lastId+1)          
       },    
       previewFiles(event) {
-         console.log(event.target.value)
+         let fileName = event.target.value.split('/').pop().split('\\').pop();        
+         this.autorpick = fileName;
+      },
+      deletePick(){
+         this.autorpick = '';
+        document.querySelector('#autorpicture').value  = '';        
       },  
       nextform(){
          this.dataForm.autor = this.autor                      
@@ -733,6 +745,17 @@ export default {
    color: #FF4646;
    font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
    font-weight: 600;
+}
+
+.filename{
+   display: flex;
+   align-items: center;
+}
+.prevew{
+   margin-right: 8px;
+}
+.delete{
+   margin-left: 5px;
 }
 .form-attention{
    padding: 5px 0 5px 22px;
