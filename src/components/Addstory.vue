@@ -3,7 +3,7 @@
          <div class="container">
             <a class="return" @click.prevent="backform()" v-if="secondform">
                <img src="assets/svg/arrow.svg" width="15" height="12">
-               <span>вернуться назад</span>
+               <span>{{udmDetected?"берен берытсконо":"вернуться назад"}}</span>
             </a>
             <a class="return" href="/" v-if="success">
                <img src="assets/svg/arrow.svg" width="15" height="12">
@@ -15,12 +15,17 @@
                <span>культурного портала родники удмуртии
                </span>
             </div>  
-            
-            <form>                        
+            <form action="https://postmail.invotes.com/send" method="post">                        
                <div v-if="firstform">                  
                      <div class="form-block">
                         <h2 class="form-h2">Расскажите об авторе</h2>
-                        <input type="text" placeholder="Имя*" class="form-input" name="autorname" v-model="autor.name">
+                        <input
+                           type="text"
+                           placeholder="Имя*"
+                           class="form-input"                           
+                           name="autorname" 
+                           v-model="autor.name"                           
+                           >                        
                         <input type="text" placeholder="Фамилия*" class="form-input" name="autorlastname"  v-model="autor.lastname">
                         <input type="text" placeholder="Город или район*" class="form-input" name="autorcity" v-model="autor.city">
                         <textarea placeholder="информация об авторе" class="form-textarea" name="autorinformation" v-model="autor.information"></textarea>
@@ -31,23 +36,23 @@
                         <div class="form-description">Укажите номер телефона для связи с редакцией</div>
                         <input type="text" placeholder="e-mail*" class="form-input" name="autoremail" v-model="autor.email">
                         <div class="form-description">Укажите e-mail для связи с редакцией</div>
-                        <div class="form-flex" v-for="autorlink in autorlinks" :key="autorlink">                             
+                        <div class="form-flex" v-for="link in autor.links" :key="link">                             
                            <input type="text"
                              placeholder="ссылка на соц. сеть"
                              class="input-short form-input" 
-                             :name="'autorlink'+autorlink" 
-                           >
+                             :name="'autorlink'+link"                             
+                           >                           
                            <button type="button" class="form-addbutton" @click.prevent="pushLinks()"></button>
                         </div>                        
                         <div class="checkbox-block">
-                           <input type="checkbox" id="agree-soc" class="input-checkbox" v-model="agreesoc" name="agreesoc">
+                           <input type="checkbox" id="agree-soc" class="input-checkbox" v-model="autor.agreesoc" name="agreesoc">
                            <label for="agree-soc" class="checkbox-label"> Разместить ссылку на персональную страницу в соц. сети на сайте</label>
                         </div>
                      </div>
                      <div class="form-block">
                         <h2 class="form-h2">Прикрепите фото автора</h2>
                         <div class="file-block">
-                           <input type="file" class="file-input" id="autorpicture" @change="previewFiles($event)" name="autorpicture" accept="image/jpeg,image/png,image/gif">
+                           <input type="file" class="file-input" id="autorpicture"  @change="previewFiles($event)" name="autorpicture" accept="image/jpeg,image/png,image/gif">
                            <label class="file-label" for="autorpicture" v-if="autorpick.length <= 0">
                               <img class="form-image" src="assets/svg/photo.svg" width="42" height="34">
                               <span>Фото</span>
@@ -83,7 +88,9 @@
                      </div>
                      <div class="form-flex-big">                     
                         <div class="form-block">
-                           <button type="button" class="form-submit" @click.prevent="nextform()">Продолжить</button>
+                           <button type="button" class="form-submit" @click.prevent="nextform()">
+                              {{udmDetected?'Азьлань':'Продолжить'}}
+                           </button>
                         </div>
                      </div>
                   </div>               
@@ -115,38 +122,7 @@
                         </div>
                         <div class="form-description" v-if="!udmDetected">Укажите хронологию событий. Например, 1980 - Проходили Летние Олимпийские Игры в Москве. Для того чтобы добавить новую дату и описание нажмите кнопку “Плюс”.</div>                   
                         <div class="form-description" v-else>Ужрадъёслэсь радызъя ортчемзэс гожтэ. Кылсярысь, 1980-тӥ ар – Москваын Гужем Олимпи Шудонъёс ортчизы. Выль нуналэз но со сярысь вакчияк веранэз ватсан понна «+» кнопка вылэ зӥбе.</div>
-                     </div>
-                     <div class="form-block">
-                        <h2 class="form-h2">{{udmDetected?' Файлъёс ватсалэ':'Прикрепите файлы'}}</h2>
-                        <div class="file-flex">
-                           <div class="file-block">
-                              <input type="file" class="file-input" id="doc" name="doc">
-                              <label class="file-label" for="doc">
-                                 <img class="form-image" src="assets/svg/doc.svg" width="42" height="34">
-                                 <span>документ</span>
-                              </label>                              
-                           </div>
-                           <div class="file-block">
-                              <input type="file" class="file-input" id="pic" name="pic">
-                              <label class="file-label" for="pic">
-                                 <img class="form-image" src="assets/svg/photo.svg" width="42" height="34">
-                                 <span>Фото</span>
-                              </label>                              
-                           </div>
-                           <div class="file-block">
-                              <input type="file" class="file-input" id="audio" name="audio">
-                              <label class="file-label" for="audio">
-                                 <img class="form-image" src="assets/svg/audio.svg" width="42" height="34">
-                                 <span>аудио</span>
-                              </label>                              
-                           </div>
-                        </div>
-                        <div class="form-description" v-if="!udmDetected">Прикрепите текстовые файлы в формате .doc, фотоматериалы в формате .jpg или .png, аудиоматериалы в формате .mp3, а также ссылки на видео. Максимальный размер текстового файла 20 мб; изображения - 20 мб; аудиофайла - 20 мб. Максимальное количество файлов 10 шт.</div>                   
-                        <div class="form-description" v-else>Текстэн файлъёстэс .doc форматэн юнматэ, туспуктэмъёстэс - .jpg яке .png форматэн, аудиоматериалъёстэс - .mp3 форматэн, озьы ик видео вылэ чӧлскон пуктэ. Текстэн файллэн быдӟалаез 20 мб луыны быгатэ, туспуктэмъёслэн – 20 мб, аудиоматериалъёслэн – 20 мб. Тужгес троссэ 10 файл ватсаны луэ.</div>
-                     </div>   
-                     <div class="form-block">
-                           <div class="or">{{udmDetected?'яке':'Или'}}</div>
-                     </div>
+                     </div>                     
                      <div class="form-block">
                         <h2 class="form-h2">{{udmDetected?'Чӧлсконъёс пуктэ':'Укажите ссылки'}}</h2>
                         <div class="form-flex" v-for="linkdoc in linkdocs" :key="linkdoc">
@@ -176,19 +152,20 @@
                         <div class="form-flex" v-for="linkvideo in linkvideos" :key="linkvideo">
                            <input
                               type="text"
-                              placeholder="ссылка на видео"
+                              :placeholder="udmDetected?'Видео вылэ чӧлскон':'Ссылка на видео'" 
                               :name="'linkvideo'+linkvideo"
                               class="input-short form-input" 
                            >
                            <button type="button" class="form-addbutton" @click.prevent="pushvideo()"></button>
                         </div> 
-                        <div class="form-description">Укажите ссылку на видео, которое расположено на youtube.com или vimeo.com. Для добавления нескольких ссылок нажмите на кнопку “Плюс”.</div>                                       
+                        <div class="form-description" v-if="!udmDetected">Укажите ссылку на видео, которое расположено на youtube.com или vimeo.com. Для добавления нескольких ссылок нажмите на кнопку “Плюс”.</div>                                       
+                        <div class="form-description" v-else>youtube.com яке vimeo.com сайтъёсы интыям видео вылэ чӧлскон пуктэ. Кӧня ке чӧлсконъёс пуктон понна «+» кнопка вылэ зӥбе.</div>
                      </div>
                      <div class="form-flex-big">
                      <div class="form-block">
                         <a class="return return__center" @click.prevent="backform()">
                            <img src="assets/svg/arrow.svg" width="15" height="12">
-                           <span>вернуться назад</span>
+                           <span>{{udmDetected?"берен берытсконо":"вернуться назад"}}вернуться назад</span>
                         </a>
                      </div>
                      <div class="form-block">
@@ -208,10 +185,11 @@
 </template>
 
 <script>
+//import { required, minLength, between } from 'vuelidate/lib/validators'
 
-export default {
+export default {   
    computed:{
-       udmDetected:function(){ 
+    udmDetected:function(){ 
       let path = this.$router.currentRoute.name;     
       if(path == "udmadd"){      
         return true
@@ -223,8 +201,7 @@ export default {
   },  
    data(){
     return{ 
-      autorpick: '', 
-      autorlinks: [1], 
+      autorpick: '',
       storyDates: [1],
       linkdocs: [1], 
       linkpicks: [1],  
@@ -239,10 +216,10 @@ export default {
          city:'',
          information:'',
          phone:'',
+         agreesoc: false,
          email:'',
-         link: ''
-      },
-      agreesoc: false,
+         links: [1],       
+      },            
       agreeagree: false,
       agreeinfo: false,
       story:{
@@ -250,24 +227,24 @@ export default {
          text:'',
          date:'',
          link:{
-         doc: '',
-         pick: '',
-         audio: '',
-         video: '',
+            doc: '',
+            pick: '',
+            audio: '',
+            video: '',
          }
       },
       dataForm:{
-         autor: '',
+         autor: '',         
          story: ' '
       },         
     }    
-  }, 
+  },   
    methods:{ 
       pushLinks(){
-         let lastId = this.autorlinks.length;
+         let lastId = this.autor.links.length;
          let enough = 5;
          if(lastId < enough){
-            this.autorlinks.push(lastId+1)
+            this.autor.links.push(lastId+1)
          } 
          else{
             alert(`Вы не можете добавить более ${enough} ссылок`)
@@ -299,21 +276,65 @@ export default {
       },
       deletePick(){
          this.autorpick = '';
-        document.querySelector('#autorpicture').value  = '';        
+         document.querySelector('#autorpicture').value  = '';        
       },  
-      nextform(){
-         this.dataForm.autor = this.autor                      
+      nextform(){          
+         this.dataForm.autor = this.autor                                 
          this.firstform = false;
-         this.secondform = true;
+         this.secondform = true;         
          window.scrollTo(200,0)
       },
-      addSuccess(){
-         this.dataForm.story = this.story         
+       addSuccess(){ 
+        this.dataForm.story = this.story   
+        let name = this.dataForm.autor.name; 
+        let lastname = this.dataForm.autor.lastname; 
+        let city = this.dataForm.autor.city;
+		  let information = this.dataForm.autor.information;
+        let phone = this.dataForm.autor.phone;
+		  let email = this.dataForm.autor.email;
+        let links = this.dataForm.autor.links.length;
+        let autorlink = [];
+        let agreesoc = this.dataForm.autor.agreesoc == true? 'Да': 'Нет';        
+		  let title = this.dataForm.story.title;
+		  let text = this.dataForm.story.text;
+		  let date = this.dataForm.story.date;
+		  let doc = this.dataForm.story.link.doc;
+		  let pick = this.dataForm.story.link.pick;
+		  let audio = this.dataForm.story.link.audio;
+		  let video = this.dataForm.story.link.video ;
+
+        let data_js = {
+            "access_token": "n2cbf58kwnmnszvhdb7goest"
+        };       
+
+    function js_send() {        
+        var request = new XMLHttpRequest();       
+
+        var subject = 'Заполнена форма на сайте Родники Удмуртии';
+        var message = `Имя автора: ${name} \nФамилия автора: ${lastname}\nГород автора: ${city}\nИнформация об авторе: ${information}\nТелефон автора: ${phone}\nE-mail автора: ${email}\nСсылка на соцсети: ${link}\nРазместить ссылку на соцсети: ${agreesoc}
+		Заголовок истории: ${title} \nТекст истории: ${text} \nДата истории: ${date} \n Ссылка на документ: ${doc} \nСссылка на картинку: ${pick} \nСссылка на аудио: ${audio}\nСссылка на видео: ${video}`;
+        data_js['subject'] = subject;
+        data_js['text'] = message;
+        var params = toParams(data_js);
+        request.open("POST", "https://postmail.invotes.com/send", true);
+        request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        request.send(params);
+        return false;
+    }
+    js_send()
+
+    function toParams(data_js) {
+        var form_data = [];
+        for ( var key in data_js ) {
+            form_data.push(encodeURIComponent(key) + "=" + encodeURIComponent(data_js[key]));
+        }
+        return form_data.join("&");
+    }      
          this.secondform = false;
          this.firstform = false;
-         this.success = true;
-         window.scrollTo(200,0)
-      },
+         this.success= true;         
+         window.scrollTo(200,0)         
+  },
       backform(){         
          this.firstform = true;
          this.secondform = false;         
@@ -333,7 +354,10 @@ export default {
    font-weight: 600;
    text-decoration: none;
    display: flex;
-   opacity: 0.6;
+   opacity: 0.6;   
+}
+.return span{
+   cursor: pointer;
 }
 @media(min-width:768px){
    .return{
@@ -433,8 +457,7 @@ export default {
      font-size: 10px;
      height: 48px;
       line-height: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;   
+      letter-spacing: 0.1em;         
       font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
       font-weight: 600;
   }
@@ -467,8 +490,7 @@ export default {
      resize: none;
       font-size: 10px;
       line-height: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;   
+      letter-spacing: 0.1em;      
       font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
       font-weight: 600;
   }

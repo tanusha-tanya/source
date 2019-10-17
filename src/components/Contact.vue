@@ -3,17 +3,17 @@
         <main>
             <div class="container">
                 <div class="history">
-                    <h1>{{udmDetected?'Контактъёс':'Контакты'}}</h1>
+                    <h1>{{udmDetected?'Герӟет':'Контакты'}}</h1>
                     <div class="home-description">
-                        <span>мы на связи</span>
+                        <span>{{udmDetected?'ми герӟетын':'мы на связи'}}</span>
                     </div>
                     <div class="project-text" v-if="!udmDetected">                        
                         <p>Вопросы по работе проекта вы можете задать его оператору – Информационному агентству «Удмуртия». Сообщайте о возможных ошибках, предлагайте свои идеи и улучшения – вместе мы сделаем «Родники Удмуртии» интереснее!</p>
                     </div>
                     <div class="project-text" v-else>
-                        <p>Ӵектослэн ужамез сярысь юанъёстэс операторезлы сётыны быгатӥськоды – ивортодэтъя «Удмуртия» агентстволы. Ивортэ милемыз кылем янгышъёсмы сярысь, малпанъёстэс но ӵектосмес умоятыны ӵектонъёстэс вералэ – ӵошен асьмеос «Удмуртиысь ошмесъёсты» тунсыкогес каром!</p>
+                        <p>Ӵектослэн ужамез сярысь юанъёстэс операторезлы – ивортодэтъя «Удмуртия» агентстволы - сётыны быгатӥськоды. Ивортэ милем кылем янгышъёс сярысь, вералэ, кызьы умойгес лэсьтыны – ӵошен асьмеос «Удмуртилэсь ошмесъёссэ» тунсыкогес каром!</p>
                     </div>
-                    <div class="contacts">
+                    <div class="contacts" v-if="!udmDetected">
                         <div class="contacts-item">
                             <div class="contacts-title">Адрес</div>  
                             Россия, Ижевск, ул. Пастухова, 13, офис 15   
@@ -33,11 +33,6 @@
                         <div class="contacts-item">
                             <div class="contacts-title">телефон </div>
                             +7 (3412) 57 07 55    
-                        </div> 
-                        <div class="contacts-item">
-                            <div class="contacts-title"> отдел продаж </div>     
-                            <div class="contacts-name">Юрий Злобин</div>
-                            <a href="mailto:sales@udmurt.media" class="contacts-link">sales@udmurt.media</a>
                         </div>
                         <div class="contacts-item">
                             <div class="contacts-title">И.о. директора</div>    
@@ -50,6 +45,60 @@
                         </div>                        
                         <div class="contacts-item">
                             <div class="contacts-title">соц. сети</div> 
+                            <div class="soc">
+                                <a class="soc-item vk" href="https://vk.com/udmurt.media" target="_blank">
+                                    <img class="soc-image" src="assets/svg/vk.svg" width="22" height="22">
+                                </a>
+                                <a class="soc-item ok" href="https://ok.ru/udmurt.media" target="_blank">
+                                    <img class="soc-image" src="assets/svg/ok.svg" width="22" height="22">
+                                </a> 
+                                <a class="soc-item fb" href="https://www.facebook.com/udmurt.media/" target="_blank">
+                                    <img class="soc-image" src="assets/svg/fb.svg" width="22" height="22">
+                                </a>
+                                 <a class="soc-item tw" href="https://twitter.com/udmurtmedia" target="_blank">
+                                    <img class="soc-image" src="assets/svg/tw.svg" width="22" height="22">
+                                </a>                                 
+                                <a class="soc-item inst" href="https://www.instagram.com/udmurt.media" target="_blank">
+                                    <img class="soc-image" src="assets/svg/inst.svg" width="22" height="22">
+                                </a> 
+                                 <a class="soc-item youtube" href="https://www.youtube.com/c/%D0%98%D0%90%D0%A3%D0%B4%D0%BC%D1%83%D1%80%D1%82%D0%B8%D1%8F" target="_blank">
+                                    <img class="soc-image" src="assets/svg/youtube.svg" width="22" height="22">
+                                </a> 
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="contacts" v-else>
+                        <div class="contacts-item">
+                            <div class="contacts-title">ИНТЫПУС</div>  
+                            Россия, Ижкар, Пастухов нимо урам, 13, 15-тӥ офис   
+                        </div>
+                        <div class="contacts-item">
+                            <div class="contacts-title">УЖАН ДЫР</div>
+                            <div class="contact-day">
+                                <span>ВОРДӤСЬКОН-УДМУРТАРНЯ</span> 9:00 – 18:00  
+                            </div>
+                             <div class="contact-day">
+                                <span>КӦСНУНАЛ</span> 12:00 – 14:00 
+                            </div>
+                             <div class="contact-day">    
+                                <span>АРНЯНУНАЛ  </span> шутэтскон  
+                            </div>
+                        </div> 
+                        <div class="contacts-item">
+                            <div class="contacts-title">телефон </div>
+                            +7 (3412) 57 07 55    
+                        </div>
+                        <div class="contacts-item">
+                            <div class="contacts-title">КИВАЛТӤСЬЛЭСЬ УЖЗЭ БЫДЭСЪЯСЬ</div>    
+                            <div class="contacts-name">Дмитрий Викторович Винокуров</div> 
+                            <a href="mailto:red@udmurt.media" class="contacts-link">red@udmurt.media </a>
+                        </div>                        
+                        <div class="contacts-item">
+                           <div class="contacts-title"> Редакция </div>   
+                            <a href="mailto:red@udmurt.media" class="contacts-link">red@udmurt.media</a>
+                        </div>                                            
+                        <div class="contacts-item">
+                            <div class="contacts-title">{{udmDetected?'МЕРЛЫКО ВОТЭСЪЁС ':'соц. сети'}}</div> 
                             <div class="soc">
                                 <a class="soc-item vk" href="https://vk.com/udmurt.media" target="_blank">
                                     <img class="soc-image" src="assets/svg/vk.svg" width="22" height="22">
@@ -93,7 +142,7 @@ export default {
     MyAside
   },
   data: () => ({
-    coords: [56.842270, 53.206064],    
+    coords: [56.842170, 53.205346],    
     markerIcon: 'assets/svg/ico.svg' 
   }),
    methods: {

@@ -191,7 +191,7 @@
     </div>
 </template>
 <script>
-    import MyAside from './my-aside.vue'
+ import MyAside from './my-aside.vue'
 
 export default {
   name: 'app',
