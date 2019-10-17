@@ -18,44 +18,117 @@
             <form action="https://postmail.invotes.com/send" method="post">                        
                <div v-if="firstform">                  
                      <div class="form-block">
-                        <h2 class="form-h2">Расскажите об авторе</h2>
-                        <input
-                           type="text"
-                           placeholder="Имя*"
-                           class="form-input"                           
-                           name="autorname" 
-                           v-model="autor.name"                           
-                           >                        
-                        <input type="text" placeholder="Фамилия*" class="form-input" name="autorlastname"  v-model="autor.lastname">
-                        <input type="text" placeholder="Город или район*" class="form-input" name="autorcity" v-model="autor.city">
-                        <textarea placeholder="информация об авторе" class="form-textarea" name="autorinformation" v-model="autor.information"></textarea>
+                        <h2 class="form-h2">{{udmDetected?'Историез ватсан':'Расскажите об авторе'}}</h2>
+                        <span class="input-wrap">
+                           <input
+                              type="text"
+                              :placeholder="udmDetected?'Нимыз*':'Имя*'"
+                              class="form-input"
+                              :class="{invalid: ($v.autor.name.$dirty && !$v.autor.name.required)}"                           
+                              name="autorname" 
+                              v-model.trim="autor.name" 
+                              > 
+                           <div class="form-error" v-if="$v.autor.name.$dirty && !$v.autor.name.required">
+                              Обязательное поле</div> 
+                        </span>
+
+                        <span class="input-wrap">                       
+                           <input 
+                              type="text"
+                              :placeholder="udmDetected?'Фамилиез*':'Фамилия*'"                              
+                              class="form-input" 
+                              :class="{invalid: ($v.autor.lastname.$dirty && !$v.autor.lastname.required)}" 
+                              name="autorlastname" 
+                              v-model.trim="autor.lastname"
+                              >
+                               <div class="form-error" v-if="$v.autor.lastname.$dirty && !$v.autor.lastname.required">
+                              Обязательное поле</div> 
+                        </span>
+
+                        <span class="input-wrap">
+                           <input 
+                              type="text" 
+                              :placeholder="udmDetected?'Кар яке ёрос*':'Город или район*'"                     
+                              :class="{invalid: ($v.autor.city.$dirty && !$v.autor.city.required)}" 
+                              class="form-input"
+                              name="autorcity"
+                              v-model.trim="autor.city"
+                           >
+                            <div class="form-error" v-if="$v.autor.city.$dirty && !$v.autor.city.required">
+                              Обязательное поле</div>
+                        </span>
+                        <span class="input-wrap">
+                           <textarea 
+                              :placeholder="udmDetected?'Гожтӥсез сярысь ивортон*':'Информация об авторе*'" 
+                              class="form-textarea"
+                              name="autorinformation" 
+                              :class="{invalid: ($v.autor.information.$dirty && !$v.autor.information.required)}" 
+                              v-model.trim="autor.information">                             
+                           </textarea>
+                            <div class="form-error" v-if="$v.autor.information.$dirty && !$v.autor.information.required">
+                              Обязательное поле</div>
+                        </span>
                      </div>                  
                      <div class="form-block">
-                        <h2 class="form-h2">Укажите контактную информацию</h2>
-                        <input type="text" placeholder="номер телефона*" class="form-input" name="autorphone" v-model="autor.phone">
-                        <div class="form-description">Укажите номер телефона для связи с редакцией</div>
-                        <input type="text" placeholder="e-mail*" class="form-input" name="autoremail" v-model="autor.email">
-                        <div class="form-description">Укажите e-mail для связи с редакцией</div>
-                        <div class="form-flex" v-for="link in autor.links" :key="link">                             
+                        <h2 class="form-h2">{{udmDetected?'Гожтӥсез сярысь ивортон':'Укажите контактную информацию'}}</h2>
+                        <span class="input-wrap">
+                           <input 
+                              type="text"
+                              :placeholder="udmDetected?'Телефон номер*':'Номер телефона*'" 
+                              class="form-input" 
+                              :class="{invalid: ($v.autor.phone.$dirty && !$v.autor.phone.required)}" 
+                              name="autorphone" 
+                              v-model.trim="autor.phone"
+                           >
+                           <div class="form-error" v-if="$v.autor.phone.$dirty && !$v.autor.phone.required">
+                              Обязательное поле</div>    
+                        </span>                  
+                        <div class="form-description" v-if="!udmDetected">Укажите номер телефона для связи с редакцией</div>
+                        <div class="form-description" v-else>Редакциен герӟаськон понна телефон номердэс гожтэ</div>
+                        <span class="input-wrap">
                            <input type="text"
-                             placeholder="ссылка на соц. сеть"
+                              placeholder="e-mail*"
+                              class="form-input"
+                              name="autoremail"
+                              :class="{invalid: ($v.autor.email.$dirty && !$v.autor.email.required) ||
+                              ($v.autor.email.$dirty && !$v.autor.email.email)}" 
+                              v-model.trim="autor.email"
+                           >
+                           <div class="form-error" v-if="$v.autor.email.$dirty && !$v.autor.email.required">
+                              Обязательное поле</div>
+                           <div class="form-error" v-if="$v.autor.email.$dirty && !$v.autor.email.email && $v.autor.email.required">
+                             введите корректное значение</div>
+                        </span>
+                        <div class="form-description" v-if="!udmDetected">Укажите e-mail для связи с редакцией</div> 
+                        <div class="form-description" v-else>Редакциен герӟаськыны e-mail гожтэ</div>
+                        <div class="form-flex" v-for="link in autor.links" :key="link">                            
+                           <input
+                             type="text"
+                             :placeholder="udmDetected?'Мерлыко вотэс вылэ чӧлсконпус*':'Ссылка на соц. сеть*'" 
                              class="input-short form-input" 
                              :name="'autorlink'+link"                             
                            >                           
                            <button type="button" class="form-addbutton" @click.prevent="pushLinks()"></button>
                         </div>                        
                         <div class="checkbox-block">
-                           <input type="checkbox" id="agree-soc" class="input-checkbox" v-model="autor.agreesoc" name="agreesoc">
-                           <label for="agree-soc" class="checkbox-label"> Разместить ссылку на персональную страницу в соц. сети на сайте</label>
+                           <input
+                              type="checkbox"
+                              id="agree-soc"
+                              class="input-checkbox"
+                              v-model="autor.agreesoc"
+                              name="agreesoc"
+                           >
+                           <label for="agree-soc" class="checkbox-label" v-if="!udmDetected" > Разместить ссылку на персональную страницу в соц. сети на сайте</label>
+                           <label for="agree-soc" class="checkbox-label" v-else> Ас бам вылэ чӧлсконпусэз сайтэ пуктыны</label>
                         </div>
                      </div>
-                     <div class="form-block">
-                        <h2 class="form-h2">Прикрепите фото автора</h2>
+                     <div class="form-block">                        
+                        <h2 class="form-h2">{{udmDetected?'Гожтӥсьлэсь туспуктэмзэ юнматэ':'Прикрепите фото автора '}}</h2>
                         <div class="file-block">
                            <input type="file" class="file-input" id="autorpicture"  @change="previewFiles($event)" name="autorpicture" accept="image/jpeg,image/png,image/gif">
                            <label class="file-label" for="autorpicture" v-if="autorpick.length <= 0">
                               <img class="form-image" src="assets/svg/photo.svg" width="42" height="34">
-                              <span>Фото</span>
+                              <span>{{udmDetected?'Туспуктэм':'Фото'}}</span>
                            </label>
                            <div class="filename" v-else>
                               <img class="prevew" src="assets/svg/photo.svg" width="24" height="24"> 
@@ -65,31 +138,37 @@
                               </a>
                            </div>
                         </div>
-                        <div class="form-description">Прикрепляйте фотоматериалы в формате .jpg или .png. Максимальный размер изображения 20 мб.</div>
-                     </div>
-                     <div class="form-attention">
-                        <div class="attention-title">Важно!</div>
-                        <div class="attention-text">После отправки истории и ее последующей модерации 
-                           Вы можете дополнить или изменить историю. Для этого заново добавьте свою историю,
-                           выберите статус истории - Редактирование истории. Далее укажите название истории,
-                           которую хотите отредактировать, заполните поля и отправьте отредактированную
-                           историю на модерацию.
-                        </div>
-                     </div>
+                        <div class="form-description" v-if="!udmDetected">Прикрепляйте фотоматериалы в формате .jpg или .png. Максимальный размер изображения 20 мб.</div>
+                        <div class="form-description" v-else>Прикрепляйте фотоматериалы в формате .jpg или .png. Максимальный размер изображения 20 мб.  – Туспуктэмъёсты .jpg яке .png форматэн пуктэ. Тусъетлэн быдӟалаез троссэ 20 мб.</div>
+                     </div>                     
                      <div class="form-block">
                         <div class="checkbox-block">
-                           <input type="checkbox" id="agree-agree" class="input-checkbox" name="agreeagree" v-model="agreeagree">
-                           <label for="agree-agree" class="checkbox-label"> Я согласен с обработкой персональных данных согласно условиям <a href="/agreement" targe="_blank">Пользовательского соглашения</a></label>
+                           <input
+                              type="checkbox" 
+                              id="agree-agree" 
+                              class="input-checkbox"                              
+                              name="agreeagree"
+                              v-model="agreeagree"                            
+                           >
+                           <label for="agree-agree" class="checkbox-label" v-if="!udmDetected"> Я согласен с обработкой персональных данных согласно условиям <a href="/agreement" targe="_blank">Пользовательского соглашения</a></label>
+                           <label for="agree-agree" class="checkbox-label" v-else> Мон соглаш ачим сярысь ивортонэн ужаны <a href="/agreement" targe="_blank">Пользователен тупанкыллэн куронъёсызъя</a></label>  
                         </div>
                         <div class="checkbox-block">
-                           <input type="checkbox" id="agree-info" class="input-checkbox" name="agreeinfo" v-model="agreeinfo">
-                           <label for="agree-info" class="checkbox-label"> Я согласен с публикацей истории и сопутствующих к ней материалов и дополнительной информации</label>
+                           <input 
+                              type="checkbox"
+                              id="agree-info"
+                              class="input-checkbox"                              
+                              name="agreeinfo" 
+                              v-model="agreeinfo"
+                           >
+                           <label for="agree-info" class="checkbox-label" v-if="!udmDetected"> Я согласен с публикацей истории и сопутствующих к ней материалов и дополнительной информации</label> 
+                           <label for="agree-info" class="checkbox-label" v-else> Мон соглаш историез но соин герӟаськем материалъёсты но ватсаса ивортодэтэз шараянэн</label> 
                         </div>
                      </div>
                      <div class="form-flex-big">                     
                         <div class="form-block">
                            <button type="button" class="form-submit" @click.prevent="nextform()">
-                              {{udmDetected?'Азьлань':'Продолжить'}}
+                              {{udmDetected?'Азьланьтыны':'Продолжить'}}
                            </button>
                         </div>
                      </div>
@@ -97,23 +176,28 @@
                <div v-if="secondform">
                      <div class="form-block">
                         <h2 class="form-h2">{{udmDetected?'Вералэ историдэс':'Расскажите историю'}}</h2>
-                        <input type="text"
-                           :placeholder="udmDetected?'Йыръян*':'Заголовок*'" 
-                           class="form-input"                      
-                           name="storytitle" 
-                       v-model="story.title">
-                        <textarea 
-                           :placeholder="udmDetected?'Верандылэн текстэз*':'Текст истории*'"  
-                           class="form-textarea"
-                           name="storytext"
-                          v-model="story.text">
-                        </textarea>                        
+                        <span class="input-wrap">
+                           <input type="text"
+                              :placeholder="udmDetected?'Йыръян*':'Заголовок*'" 
+                              class="form-input"                      
+                              name="storytitle" 
+                              v-model.trim="story.title"                              
+                           >                            
+                        </span>
+                        <span class="input-wrap">
+                           <textarea 
+                              :placeholder="udmDetected?'Верандылэн текстэз*':'Текст истории*'"  
+                              class="form-textarea"
+                              name="storytext"
+                            v-model="story.text">
+                           </textarea>                             
+                        </span>                    
                      </div>
                      <div class="form-block">
                         <h2 class="form-h2">{{udmDetected?'Хронологизэ ватсалэ':'Добавьте хронологию'}}</h2>
                         <div class="form-flex" v-for="storyDate in storyDates" :key="storyDate">
                            <textarea
-                              :placeholder="udmDetected?'Дата и описание':'Нуналзэ пусъе но вакчияк со сярысь гожтэ'" 
+                              :placeholder="udmDetected?'Нуналзэ пусъе но вакчияк со сярысь гожтэ':'Дата и описание'" 
                               :name="'storydate'+storyDate"
                               class="form-textarea textarea-short"
                            >
@@ -161,13 +245,30 @@
                         <div class="form-description" v-if="!udmDetected">Укажите ссылку на видео, которое расположено на youtube.com или vimeo.com. Для добавления нескольких ссылок нажмите на кнопку “Плюс”.</div>                                       
                         <div class="form-description" v-else>youtube.com яке vimeo.com сайтъёсы интыям видео вылэ чӧлскон пуктэ. Кӧня ке чӧлсконъёс пуктон понна «+» кнопка вылэ зӥбе.</div>
                      </div>
+                      <div class="form-block">
+                        <div class="form-attention">
+                           <div class="attention-title">{{udmDetected?'Туж кулэез!':'ВАЖНО!'}}</div>
+                           <div class="attention-text" v-if="!udmDetected">После отправки истории и ее последующей модерации 
+                              Вы можете дополнить или изменить историю. Для этого заново добавьте свою историю,
+                              выберите статус истории - Редактирование истории. Далее укажите название истории,
+                              которую хотите отредактировать, заполните поля и отправьте отредактированную
+                              историю на модерацию.
+                           </div>
+                           <div class="attention-text" v-else>Историез келям но сое эскерем бере 
+                              Тӥ историез будэтыны яке воштыны быгатӥськоды. Со понна историдэс
+                              выльысь ватсалэ, быръе историлэсь инлыксэ – Историез тупатъян. 
+                              Собере тупатъяно историлэсь нимзэ пусъе, чуръёсты гожъялэ но 
+                              тупатъям историез эскерыны лэзе.
+                           </div>
+                        </div>
+                     </div>
                      <div class="form-flex-big">
                      <div class="form-block">
                         <a class="return return__center" @click.prevent="backform()">
                            <img src="assets/svg/arrow.svg" width="15" height="12">
-                           <span>{{udmDetected?"берен берытсконо":"вернуться назад"}}вернуться назад</span>
+                           <span>{{udmDetected?"берен берытсконо":"вернуться назад"}}</span>
                         </a>
-                     </div>
+                     </div>                     
                      <div class="form-block">
                         <button type="submit" class="form-submit" @click.prevent="addSuccess()">Отправить на модерацию</button>
                      </div>
@@ -185,9 +286,20 @@
 </template>
 
 <script>
-//import { required, minLength, between } from 'vuelidate/lib/validators'
 
-export default {   
+import {required, email, minLength} from 'vuelidate/lib/validators'
+
+export default { 
+   validations:{
+      autor:{
+         name: {required},
+         lastname:{required},
+         city:{required},
+         information:{required},
+         phone:{required},         
+         email:{required, email}         
+      },      
+   }, 
    computed:{
     udmDetected:function(){ 
       let path = this.$router.currentRoute.name;     
@@ -220,8 +332,8 @@ export default {
          email:'',
          links: [1],       
       },            
-      agreeagree: false,
-      agreeinfo: false,
+      agreeagree: '',
+      agreeinfo: '',
       story:{
          title:'',
          text:'',
@@ -278,13 +390,21 @@ export default {
          this.autorpick = '';
          document.querySelector('#autorpicture').value  = '';        
       },  
-      nextform(){          
+      nextform(){ 
+         if(this.$v.$invalid){
+            this.$v.$touch()            
+            return
+         }                  
          this.dataForm.autor = this.autor                                 
          this.firstform = false;
          this.secondform = true;         
          window.scrollTo(200,0)
       },
        addSuccess(){ 
+        if(this.$v.$invalid){
+            this.$v.$touch()             
+            return
+         }  
         this.dataForm.story = this.story   
         let name = this.dataForm.autor.name; 
         let lastname = this.dataForm.autor.lastname; 
@@ -292,8 +412,7 @@ export default {
 		  let information = this.dataForm.autor.information;
         let phone = this.dataForm.autor.phone;
 		  let email = this.dataForm.autor.email;
-        let links = this.dataForm.autor.links.length;
-        let autorlink = [];
+        let links = this.dataForm.autor.links.length;        
         let agreesoc = this.dataForm.autor.agreesoc == true? 'Да': 'Нет';        
 		  let title = this.dataForm.story.title;
 		  let text = this.dataForm.story.text;
@@ -311,8 +430,7 @@ export default {
         var request = new XMLHttpRequest();       
 
         var subject = 'Заполнена форма на сайте Родники Удмуртии';
-        var message = `Имя автора: ${name} \nФамилия автора: ${lastname}\nГород автора: ${city}\nИнформация об авторе: ${information}\nТелефон автора: ${phone}\nE-mail автора: ${email}\nСсылка на соцсети: ${link}\nРазместить ссылку на соцсети: ${agreesoc}
-		Заголовок истории: ${title} \nТекст истории: ${text} \nДата истории: ${date} \n Ссылка на документ: ${doc} \nСссылка на картинку: ${pick} \nСссылка на аудио: ${audio}\nСссылка на видео: ${video}`;
+        var message = `Имя автора: ${name} \nФамилия автора: ${lastname}\nГород автора: ${city}\nИнформация об авторе: ${information}\nТелефон автора: ${phone}\nE-mail автора: ${email}\nСсылка на соцсети: ${links}\nРазместить ссылку на соцсети: ${agreesoc}\nЗаголовок истории: ${title} \nТекст истории: ${text} \nДата истории: ${date} \n Ссылка на документ: ${doc} \nСссылка на картинку: ${pick} \nСссылка на аудио: ${audio}\nСссылка на видео: ${video}`;
         data_js['subject'] = subject;
         data_js['text'] = message;
         var params = toParams(data_js);
@@ -410,13 +528,13 @@ export default {
    }
 }
 .form-red{
-       color: #FF4646;
+    color: #FF4646;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     font-size: 14px;
     line-height: 14px;
     font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
-        display: flex;
+     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -430,10 +548,12 @@ export default {
         transform: rotate(-45deg);   
         margin-right: 15px;     
     }
+
    .form-block{
       margin: 42px 0;
       max-width: 400px;
    }
+
    @media(min-width:768px){
    .form-block{
       margin: 56px 0;
@@ -460,8 +580,21 @@ export default {
       letter-spacing: 0.1em;         
       font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
       font-weight: 600;
+      transition: background .3s;
   }
+  .form-input::placeholder{
+     text-transform: uppercase;
+     font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
+     font-weight: 600;
+     letter-spacing: 0.1em;  
+  }
+   .form-input:hover,  .form-input:focus{
+      outline: none;
+   }
 
+ .form-input.invalid{
+   background: rgba(255,70,70, 0.3)  
+ }
    
   @media(min-width:768px){
    .form-input{
@@ -493,6 +626,20 @@ export default {
       letter-spacing: 0.1em;      
       font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
       font-weight: 600;
+      transition: background .3s;
+  }
+
+.form-textarea.invalid{
+   background: rgba(255,70,70, 0.3)  
+ }
+.form-textarea + .form-error{
+   top: 30px;
+}
+  .form-textarea::placeholder{
+     text-transform: uppercase;
+     font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
+     font-weight: 600;
+     letter-spacing: 0.1em;  
   }
   @media(min-width:768px){
    .form-textarea{
@@ -519,12 +666,34 @@ export default {
       width: calc(100% - 150px);
    }
   }
+
+  .input-wrap{
+     position: relative;
+     display: block; 
+  }
+  .form-error{
+     color:  #FF4646;
+     font-size: 12px;
+     line-height: 12px;
+     font-family: 'PT_Root_UI_Bold', Arial, Helvetica, sans-serif;
+     letter-spacing: 0.1em;
+      text-transform: uppercase; 
+      position: absolute;
+      right: 24px;
+       bottom: 20px;  
+  }
+  @media(min-width:768px){
+     .form-error{
+         bottom: 30px;
+     }
+  }    
   .form-description{
      font-size: 14px;
       line-height: 20px;
       margin-top: -4px;
-      margin-bottom: 23px;
+      margin-bottom: 23px;  
   }
+
    @media(min-width:768px){
    .form-description{
      margin-top: -20px;
@@ -567,7 +736,7 @@ export default {
     background: #fff;
     outline: none; 
     margin: 13px 0 16px 0 ;
-    transition: background .3s; 
+    transition: background .3s, opacity .3s; 
 }
 .form-addbutton__long{
    height: 111px;
