@@ -3,12 +3,15 @@ import Vuelidate from 'vuelidate'
 import App from './App.vue'
 import router from './router'
 import ymapPlugin from './vue-yandex-maps/dist/vue-yandex-maps.js'
+import VueTheMask from 'vue-the-mask'
 import store from './store'
 import Vuex from 'vuex'
 
 Vue.use(Vuelidate);
 Vue.use(ymapPlugin);
 Vue.use(Vuex);
+Vue.use(VueTheMask)
+
 
 Vue.config.productionTip = false
 
@@ -17,5 +20,6 @@ new Vue({
   router,
   ymapPlugin,  
   store, 
-  Vuelidate    
+  Vuelidate,
+  VueTheMask    
 }).$mount('#app')

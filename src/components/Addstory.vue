@@ -12,11 +12,10 @@
             <h1 class="form-title" v-if="firstform||secondform">
                {{udmDetected?'Историез ватсан':'Добавление истории'}}</h1>    
             <div class="form-red"  v-if="firstform||secondform">
-               <span>культурного портала родники удмуртии
-               </span>
+               <span v-if="!udmDetected">Культурного портала родники удмуртии</span>
+               <span v-else>Удмуртилэн ошмесъёсызлэн лулчеберет шыкысазы</span>
             </div>  
-            <form action="https://postmail.invotes.com/send" method="post">                        
-               <div v-if="firstform">                  
+            <form action="https://postmail.invotes.com/send" method="post" v-if="firstform">                                     
                      <div class="form-block">
                         <h2 class="form-h2">{{udmDetected?'Историез ватсан':'Расскажите об авторе'}}</h2>
                         <span class="input-wrap">
@@ -29,7 +28,7 @@
                               v-model.trim="autor.name" 
                               > 
                            <div class="form-error" v-if="$v.autor.name.$dirty && !$v.autor.name.required">
-                              Обязательное поле</div> 
+                              {{udmDetected?'Одно гожтоно чуръёс':'Обязательное поле'}}</div> 
                         </span>
 
                         <span class="input-wrap">                       
@@ -42,7 +41,7 @@
                               v-model.trim="autor.lastname"
                               >
                                <div class="form-error" v-if="$v.autor.lastname.$dirty && !$v.autor.lastname.required">
-                              Обязательное поле</div> 
+                              {{udmDetected?'Одно гожтоно чуръёс':'Обязательное поле'}}</div> 
                         </span>
 
                         <span class="input-wrap">
@@ -55,7 +54,7 @@
                               v-model.trim="autor.city"
                            >
                             <div class="form-error" v-if="$v.autor.city.$dirty && !$v.autor.city.required">
-                              Обязательное поле</div>
+                             {{udmDetected?'Одно гожтоно чуръёс':'Обязательное поле'}}</div>
                         </span>
                         <span class="input-wrap">
                            <textarea 
@@ -66,7 +65,7 @@
                               v-model.trim="autor.information">                             
                            </textarea>
                             <div class="form-error" v-if="$v.autor.information.$dirty && !$v.autor.information.required">
-                              Обязательное поле</div>
+                              {{udmDetected?'Одно гожтоно чуръёс':'Обязательное поле'}}</div>
                         </span>
                      </div>                  
                      <div class="form-block">
@@ -75,13 +74,15 @@
                            <input 
                               type="text"
                               :placeholder="udmDetected?'Телефон номер*':'Номер телефона*'" 
+                              id="phone"
                               class="form-input" 
                               :class="{invalid: ($v.autor.phone.$dirty && !$v.autor.phone.required)}" 
                               name="autorphone" 
                               v-model.trim="autor.phone"
+                              v-mask="'+#(###) #######'"
                            >
                            <div class="form-error" v-if="$v.autor.phone.$dirty && !$v.autor.phone.required">
-                              Обязательное поле</div>    
+                              {{udmDetected?'Одно гожтоно чуръёс':'Обязательное поле'}}</div>    
                         </span>                  
                         <div class="form-description" v-if="!udmDetected">Укажите номер телефона для связи с редакцией</div>
                         <div class="form-description" v-else>Редакциен герӟаськон понна телефон номердэс гожтэ</div>
@@ -95,9 +96,9 @@
                               v-model.trim="autor.email"
                            >
                            <div class="form-error" v-if="$v.autor.email.$dirty && !$v.autor.email.required">
-                              Обязательное поле</div>
+                               {{udmDetected?'Одно гожтоно чуръёс':'Обязательное поле'}}</div>
                            <div class="form-error" v-if="$v.autor.email.$dirty && !$v.autor.email.email && $v.autor.email.required">
-                             введите корректное значение</div>
+                             {{udmDetected?'Гожтэ шонер валатон':'Введите корректное значение'}}</div>
                         </span>
                         <div class="form-description" v-if="!udmDetected">Укажите e-mail для связи с редакцией</div> 
                         <div class="form-description" v-else>Редакциен герӟаськыны e-mail гожтэ</div>
@@ -116,7 +117,7 @@
                               id="agree-soc"
                               class="input-checkbox"
                               v-model="autor.agreesoc"
-                              name="agreesoc"
+                              name="agreesoc"                              
                            >
                            <label for="agree-soc" class="checkbox-label" v-if="!udmDetected" > Разместить ссылку на персональную страницу в соц. сети на сайте</label>
                            <label for="agree-soc" class="checkbox-label" v-else> Ас бам вылэ чӧлсконпусэз сайтэ пуктыны</label>
@@ -148,10 +149,12 @@
                               id="agree-agree" 
                               class="input-checkbox"                              
                               name="agreeagree"
-                              v-model="agreeagree"                            
+                              v-model="autor.agreeagree"                              
                            >
                            <label for="agree-agree" class="checkbox-label" v-if="!udmDetected"> Я согласен с обработкой персональных данных согласно условиям <a href="/agreement" targe="_blank">Пользовательского соглашения</a></label>
                            <label for="agree-agree" class="checkbox-label" v-else> Мон соглаш ачим сярысь ивортонэн ужаны <a href="/agreement" targe="_blank">Пользователен тупанкыллэн куронъёсызъя</a></label>  
+                           <div class="checkbox-error" v-if="$v.autor.agreeagree.$dirty && !$v.autor.agreeagree.required">
+                              {{udmDetected?'Одно гожтоно чуръёс':'Обязательное поле'}}</div> 
                         </div>
                         <div class="checkbox-block">
                            <input 
@@ -159,10 +162,12 @@
                               id="agree-info"
                               class="input-checkbox"                              
                               name="agreeinfo" 
-                              v-model="agreeinfo"
+                              v-model="autor.agreeinfo"                              
                            >
                            <label for="agree-info" class="checkbox-label" v-if="!udmDetected"> Я согласен с публикацей истории и сопутствующих к ней материалов и дополнительной информации</label> 
                            <label for="agree-info" class="checkbox-label" v-else> Мон соглаш историез но соин герӟаськем материалъёсты но ватсаса ивортодэтэз шараянэн</label> 
+                           <div class="checkbox-error" v-if="$v.autor.agreeinfo.$dirty && !$v.autor.agreeinfo.required">
+                              {{udmDetected?'Одно гожтоно чуръёс':'Обязательное поле'}}</div> 
                         </div>
                      </div>
                      <div class="form-flex-big">                     
@@ -172,25 +177,31 @@
                            </button>
                         </div>
                      </div>
-                  </div>               
-               <div v-if="secondform">
+               </form>
+               <form action="https://postmail.invotes.com/send" method="post" v-if="secondform">                 
                      <div class="form-block">
                         <h2 class="form-h2">{{udmDetected?'Вералэ историдэс':'Расскажите историю'}}</h2>
                         <span class="input-wrap">
                            <input type="text"
                               :placeholder="udmDetected?'Йыръян*':'Заголовок*'" 
-                              class="form-input"                      
+                              class="form-input" 
+                              :class="{invalid: ($v.story.title.$dirty && !$v.story.title.required)}"                      
                               name="storytitle" 
                               v-model.trim="story.title"                              
-                           >                            
+                           >
+                           <div class="form-error" v-if="$v.story.title.$dirty && !$v.story.title.required">
+                              {{udmDetected?'Одно гожтоно чуръёс':'Обязательное поле'}}</div>                            
                         </span>
                         <span class="input-wrap">
                            <textarea 
                               :placeholder="udmDetected?'Верандылэн текстэз*':'Текст истории*'"  
                               class="form-textarea"
+                              :class="{invalid: ($v.story.text.$dirty && !$v.story.text.required)}" 
                               name="storytext"
                             v-model="story.text">
-                           </textarea>                             
+                           </textarea>
+                           <div class="form-error" v-if="$v.story.text.$dirty && !$v.story.text.required">
+                              {{udmDetected?'Одно гожтоно чуръёс':'Обязательное поле'}}</div>                             
                         </span>                    
                      </div>
                      <div class="form-block">
@@ -272,8 +283,7 @@
                      <div class="form-block">
                         <button type="submit" class="form-submit" @click.prevent="addSuccess()">Отправить на модерацию</button>
                      </div>
-                  </div> 
-                  </div>                  
+                  </div>                      
                </form>
                <div v-if="success" class="success">
                   <h1 class="succsess-title">Спасибо!</h1>
@@ -288,8 +298,10 @@
 <script>
 
 import {required, email, minLength} from 'vuelidate/lib/validators'
+import {mask} from 'vue-the-mask'
 
 export default { 
+   directives: {mask},    
    validations:{
       autor:{
          name: {required},
@@ -297,8 +309,14 @@ export default {
          city:{required},
          information:{required},
          phone:{required},         
-         email:{required, email}         
-      },      
+         email:{required, email},
+         agreeagree:{required},
+         agreeinfo:{required},          
+      }, 
+      story:{
+         title: {required},
+         text: {required},
+      }    
    }, 
    computed:{
     udmDetected:function(){ 
@@ -309,7 +327,7 @@ export default {
       else{
          return false
       }   
-    }  
+    }
   },  
    data(){
     return{ 
@@ -330,10 +348,10 @@ export default {
          phone:'',
          agreesoc: false,
          email:'',
-         links: [1],       
+         links: [1],  
+         agreeagree: '',
+         agreeinfo: '',     
       },            
-      agreeagree: '',
-      agreeinfo: '',
       story:{
          title:'',
          text:'',
@@ -390,19 +408,19 @@ export default {
          this.autorpick = '';
          document.querySelector('#autorpicture').value  = '';        
       },  
-      nextform(){ 
-         if(this.$v.$invalid){
-            this.$v.$touch()            
+      nextform(){         
+         if(this.$v.autor.$invalid){
+            this.$v.autor.$touch()            
             return
-         }                  
+         }                 
          this.dataForm.autor = this.autor                                 
          this.firstform = false;
          this.secondform = true;         
          window.scrollTo(200,0)
       },
        addSuccess(){ 
-        if(this.$v.$invalid){
-            this.$v.$touch()             
+        if(this.$v.story.$invalid){
+            this.$v.story.$touch()             
             return
          }  
         this.dataForm.story = this.story   
@@ -893,6 +911,11 @@ export default {
 }
 .checkbox-label a:hover{
    text-decoration: underline;
+}
+.checkbox-error{
+   left: 40px;
+   bottom: 20px;
+   color:#FF4646;
 }
 .input-checkbox:checked + .checkbox-label:after{
    border-right: 3px solid #FF4646;
