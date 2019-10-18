@@ -106,8 +106,8 @@
                            <input
                              type="text"
                              :placeholder="udmDetected?'Мерлыко вотэс вылэ чӧлсконпус*':'Ссылка на соц. сеть*'" 
-                             class="input-short form-input" 
-                             :name="'autorlink'+link"                             
+                             class="input-short form-input autor-soclink" 
+                             :name="'autorlink'+link"                                                                 
                            >                           
                            <button type="button" class="form-addbutton" @click.prevent="pushLinks()"></button>
                         </div>                        
@@ -350,7 +350,8 @@ export default {
          email:'',
          links: [1],  
          agreeagree: '',
-         agreeinfo: '',     
+         agreeinfo: '', 
+         soclinkContent: []    
       },            
       story:{
          title:'',
@@ -379,7 +380,7 @@ export default {
          else{
             alert(`Вы не можете добавить более ${enough} ссылок`)
          }        
-      },  
+      },   
       pushdate(){
          let lastId = this.storyDates.length;        
          this.storyDates.push(lastId+1)          
@@ -412,8 +413,14 @@ export default {
          if(this.$v.autor.$invalid){
             this.$v.autor.$touch()            
             return
-         }                 
-         this.dataForm.autor = this.autor                                 
+         }  
+         let autorSoclinkCollection = document.querySelectorAll('.autor-soclink'); 
+         let links = []        
+         for(let i = 0; i < autorSoclinkCollection.length; i++){            
+            links.push(autorSoclinkCollection[i].value)
+         } 
+         this.autor.soclinkContent = links;                 
+         this.dataForm.autor = this.autor;                              
          this.firstform = false;
          this.secondform = true;         
          window.scrollTo(200,0)
@@ -422,7 +429,7 @@ export default {
         if(this.$v.story.$invalid){
             this.$v.story.$touch()             
             return
-         }  
+         } 
         this.dataForm.story = this.story   
         let name = this.dataForm.autor.name; 
         let lastname = this.dataForm.autor.lastname; 
@@ -439,7 +446,8 @@ export default {
 		  let pick = this.dataForm.story.link.pick;
 		  let audio = this.dataForm.story.link.audio;
 		  let video = this.dataForm.story.link.video ;
-
+        let autorlinks = this.autor.soclinkContent;
+        
         let data_js = {
             "access_token": "n2cbf58kwnmnszvhdb7goest"
         };       
@@ -448,7 +456,7 @@ export default {
         var request = new XMLHttpRequest();       
 
         var subject = 'Заполнена форма на сайте Родники Удмуртии';
-        var message = `Имя автора: ${name} \nФамилия автора: ${lastname}\nГород автора: ${city}\nИнформация об авторе: ${information}\nТелефон автора: ${phone}\nE-mail автора: ${email}\nСсылка на соцсети: ${links}\nРазместить ссылку на соцсети: ${agreesoc}\nЗаголовок истории: ${title} \nТекст истории: ${text} \nДата истории: ${date} \n Ссылка на документ: ${doc} \nСссылка на картинку: ${pick} \nСссылка на аудио: ${audio}\nСссылка на видео: ${video}`;
+        var message = `Имя автора: ${name} \nФамилия автора: ${lastname}\nГород автора: ${city}\nИнформация об авторе: ${information}\nТелефон автора: ${phone}\nE-mail автора: ${email}\nСсылка на соцсети: ${autorlinks}\nРазместить ссылку на соцсети: ${agreesoc}\nЗаголовок истории: ${title} \nТекст истории: ${text} \nДата истории: ${date} \n Ссылка на документ: ${doc} \nСссылка на картинку: ${pick} \nСссылка на аудио: ${audio}\nСссылка на видео: ${video}`;
         data_js['subject'] = subject;
         data_js['text'] = message;
         var params = toParams(data_js);
@@ -469,7 +477,7 @@ export default {
          this.secondform = false;
          this.firstform = false;
          this.success= true;         
-         window.scrollTo(200,0)         
+         window.scrollTo(200,0)     
   },
       backform(){         
          this.firstform = true;
