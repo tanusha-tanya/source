@@ -447,6 +447,11 @@ export default {
 		  let audio = this.dataForm.story.link.audio;
 		  let video = this.dataForm.story.link.video ;
         let autorlinks = this.autor.soclinkContent;
+        let autorlinksText = '';
+                  
+         for(let i = 0; i < autorlinks.length; i++){
+            autorlinksText += `${i+1}: ${autorlinks[i]} `
+         }       
         
         let data_js = {
             "access_token": "n2cbf58kwnmnszvhdb7goest"
@@ -456,7 +461,7 @@ export default {
         var request = new XMLHttpRequest();       
 
         var subject = 'Заполнена форма на сайте Родники Удмуртии';
-        var message = `Имя автора: ${name} \nФамилия автора: ${lastname}\nГород автора: ${city}\nИнформация об авторе: ${information}\nТелефон автора: ${phone}\nE-mail автора: ${email}\nСсылка на соцсети: ${autorlinks}\nРазместить ссылку на соцсети: ${agreesoc}\nЗаголовок истории: ${title} \nТекст истории: ${text} \nДата истории: ${date} \n Ссылка на документ: ${doc} \nСссылка на картинку: ${pick} \nСссылка на аудио: ${audio}\nСссылка на видео: ${video}`;
+        var message = `Имя автора: ${name} \nФамилия автора: ${lastname}\nГород автора: ${city}\nИнформация об авторе: ${information}\nТелефон автора: ${phone}\nE-mail автора: ${email}\nСсылка на соцсети: ${autorlinksText}\nРазместить ссылку на соцсети: ${agreesoc}\nЗаголовок истории: ${title} \nТекст истории: ${text} \nДата истории: ${date} \n Ссылка на документ: ${doc} \nСссылка на картинку: ${pick} \nСссылка на аудио: ${audio}\nСссылка на видео: ${video}`;
         data_js['subject'] = subject;
         data_js['text'] = message;
         var params = toParams(data_js);
@@ -477,7 +482,7 @@ export default {
          this.secondform = false;
          this.firstform = false;
          this.success= true;         
-         window.scrollTo(200,0)     
+         window.scrollTo(200,0)    
   },
       backform(){         
          this.firstform = true;
