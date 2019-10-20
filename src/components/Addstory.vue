@@ -119,7 +119,7 @@
                               v-model="autor.agreesoc"
                               name="agreesoc"                              
                            >
-                           <label for="agree-soc" class="checkbox-label" v-if="!udmDetected" > Разместить ссылку на персональную страницу в соц. сети на сайте</label>
+                           <label for="agree-soc" class="checkbox-label" v-if="!udmDetected"> Разместить ссылку на персональную страницу в соц. сети на сайте</label>
                            <label for="agree-soc" class="checkbox-label" v-else> Ас бам вылэ чӧлсконпусэз сайтэ пуктыны</label>
                         </div>
                      </div>
@@ -206,11 +206,11 @@
                      </div>
                      <div class="form-block">
                         <h2 class="form-h2">{{udmDetected?'Хронологизэ ватсалэ':'Добавьте хронологию'}}</h2>
-                        <div class="form-flex" v-for="storyDate in storyDates" :key="storyDate">
+                        <div class="form-flex" v-for="storyDate in story.dates" :key="storyDate">
                            <textarea
                               :placeholder="udmDetected?'Нуналзэ пусъе но вакчияк со сярысь гожтэ':'Дата и описание'" 
                               :name="'storydate'+storyDate"
-                              class="form-textarea textarea-short"
+                              class="form-textarea textarea-short story-date"
                            >
                            </textarea> 
                            <button type="button" class="form-addbutton form-addbutton__long" @click.prevent="pushdate()"></button>    
@@ -224,7 +224,7 @@
                            <input type="text"
                               :placeholder="udmDetected?'Ужкагаз вылэ чӧлскон':'Ссылка на документ'" 
                               :name="'linkdoc'+linkdoc" 
-                              class="input-short form-input"
+                              class="input-short form-input link-doc"
                            >
                            <button type="button" class="form-addbutton" @click.prevent="pushdoc()"></button>
                         </div>
@@ -232,7 +232,7 @@
                            <input type="text"
                               :placeholder="udmDetected?'Туспуктэм вылэ чӧлскон':'ссылка на фото'" 
                               :name="'linkpick'+linkpick"
-                              class="input-short form-input" 
+                              class="input-short form-input link-photo" 
                            >
                            <button type="button" class="form-addbutton" @click.prevent="pushpick()"></button>
                         </div>
@@ -240,7 +240,7 @@
                            <input type="text" 
                               :placeholder="udmDetected?'Аудио вылэ чӧлскон':'Ссылка на аудио'" 
                               :name="'linkaudio'+linkaudio" 
-                              class="input-short form-input" 
+                              class="input-short form-input link-audio" 
                            >
                            <button type="button" class="form-addbutton" @click.prevent="pushaudio()"></button>
                         </div>
@@ -249,7 +249,7 @@
                               type="text"
                               :placeholder="udmDetected?'Видео вылэ чӧлскон':'Ссылка на видео'" 
                               :name="'linkvideo'+linkvideo"
-                              class="input-short form-input" 
+                              class="input-short form-input link-video" 
                            >
                            <button type="button" class="form-addbutton" @click.prevent="pushvideo()"></button>
                         </div> 
@@ -331,8 +331,7 @@ export default {
   },  
    data(){
     return{ 
-      autorpick: '',
-      storyDates: [1],
+      autorpick: '',      
       linkdocs: [1], 
       linkpicks: [1],  
       linkaudios: [1],
@@ -356,7 +355,7 @@ export default {
       story:{
          title:'',
          text:'',
-         date:'',
+         dates: [1],
          link:{
             doc: '',
             pick: '',
@@ -382,8 +381,8 @@ export default {
          }        
       },   
       pushdate(){
-         let lastId = this.storyDates.length;        
-         this.storyDates.push(lastId+1)          
+         let lastId = this.story.dates.length;        
+         this.story.dates.push(lastId+1)          
       }, 
       pushdoc(){
          let lastId = this.linkdocs.length;        
@@ -431,6 +430,57 @@ export default {
             return
          } 
         this.dataForm.story = this.story   
+
+         let storyDates = document.querySelectorAll('.story-date'); 
+         let dates = [];
+         let datesText = '';        
+         for(let i = 0; i < storyDates.length; i++){            
+            dates.push(storyDates[i].value)
+         }          
+         for(let i = 0; i < dates.length; i++){
+            datesText += `${i+1}: ${dates[i]}; `
+         } 
+
+         let linkDocs = document.querySelectorAll('.link-doc'); 
+         let docs = [];
+         let docsText = '';        
+         for(let i = 0; i < linkDocs.length; i++){            
+            docs.push(linkDocs[i].value)
+         }          
+         for(let i = 0; i < docs.length; i++){
+            docsText += `${i+1}: ${docs[i]}; `
+         } 
+
+         let linkPhoto = document.querySelectorAll('.link-photo'); 
+         let photos = [];
+         let photosText = '';        
+         for(let i = 0; i < linkPhoto.length; i++){            
+            photos.push(linkPhoto[i].value)
+         }          
+         for(let i = 0; i < photos.length; i++){
+            photosText += `${i+1}: ${photos[i]}; `
+         } 
+
+         let linkAudio = document.querySelectorAll('.link-audio'); 
+         let audios = [];
+         let audiosText = '';        
+         for(let i = 0; i < linkAudio.length; i++){            
+            audios.push(linkAudio[i].value)
+         }          
+         for(let i = 0; i < audios.length; i++){
+            audiosText += `${i+1}: ${audios[i]}; `
+         } 
+
+         let linkVideo = document.querySelectorAll('.link-video'); 
+         let videos = [];
+         let videosText = '';        
+         for(let i = 0; i < linkVideo.length; i++){            
+            videos.push(linkVideo[i].value)
+         }          
+         for(let i = 0; i < videos.length; i++){
+            videosText += `${i+1}: ${videos[i]}; `
+         } 
+
         let name = this.dataForm.autor.name; 
         let lastname = this.dataForm.autor.lastname; 
         let city = this.dataForm.autor.city;
@@ -450,9 +500,12 @@ export default {
         let autorlinksText = '';
                   
          for(let i = 0; i < autorlinks.length; i++){
-            autorlinksText += `${i+1}: ${autorlinks[i]} `
-         }       
-        
+            autorlinksText += `${i+1}: ${autorlinks[i]}; `
+         } 
+
+       
+         
+
         let data_js = {
             "access_token": "n2cbf58kwnmnszvhdb7goest"
         };       
@@ -461,7 +514,7 @@ export default {
         var request = new XMLHttpRequest();       
 
         var subject = 'Заполнена форма на сайте Родники Удмуртии';
-        var message = `Имя автора: ${name} \nФамилия автора: ${lastname}\nГород автора: ${city}\nИнформация об авторе: ${information}\nТелефон автора: ${phone}\nE-mail автора: ${email}\nСсылка на соцсети: ${autorlinksText}\nРазместить ссылку на соцсети: ${agreesoc}\nЗаголовок истории: ${title} \nТекст истории: ${text} \nДата истории: ${date} \n Ссылка на документ: ${doc} \nСссылка на картинку: ${pick} \nСссылка на аудио: ${audio}\nСссылка на видео: ${video}`;
+        var message = `Имя автора: ${name} \nФамилия автора: ${lastname}\nГород автора: ${city}\nИнформация об авторе: ${information}\nТелефон автора: ${phone}\nE-mail автора: ${email}\nСсылки на соцсети: ${autorlinksText}\nРазместить ссылку на соцсети: ${agreesoc}\nЗаголовок истории: ${title} \nТекст истории: ${text} \nДаты истории: ${datesText} \nСсылки на документы: ${docsText} \nСссылки на картинки: ${photosText} \nСссылки на аудио: ${audiosText}\nСссылки на видео: ${videosText}`;
         data_js['subject'] = subject;
         data_js['text'] = message;
         var params = toParams(data_js);
@@ -482,7 +535,7 @@ export default {
          this.secondform = false;
          this.firstform = false;
          this.success= true;         
-         window.scrollTo(200,0)    
+         window.scrollTo(200,0)   
   },
       backform(){         
          this.firstform = true;
